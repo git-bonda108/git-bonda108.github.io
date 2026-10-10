@@ -378,18 +378,18 @@ html.js .reveal.in{opacity:1;transform:none}
 .orch-svg .comet{fill:none;stroke:#F0ABFC;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:70 1206;transform-origin:240px 240px;animation:orbit 16s linear infinite;filter:drop-shadow(0 0 6px rgba(240,171,252,.8))}
 @keyframes orbit{to{transform:rotate(360deg)}}
 .orch-svg .spoke{stroke:rgba(196,181,253,.45);stroke-width:1.2;stroke-dasharray:4 5;animation:flow 1.6s linear infinite}
-.orch-svg .spoke.sub{stroke-dasharray:2 4;stroke:rgba(196,181,253,.35)}
+.orch-svg .spoke.sub{stroke-dasharray:3 3;stroke:rgba(221,214,254,.7);stroke-width:1.3}
 @keyframes flow{to{stroke-dashoffset:-18}}
 .orch-svg .node circle{fill:rgba(30,27,75,.85);stroke:rgba(196,181,253,.55);stroke-width:1.2;animation:nodepulse 3.2s ease-in-out infinite}
 @keyframes nodepulse{0%,100%{stroke:rgba(196,181,253,.5)}50%{stroke:#E9D5FF;filter:drop-shadow(0 0 8px rgba(196,181,253,.7))}}
-.orch-svg .node text{fill:#fff;font-size:11px;font-weight:600}
-.orch-svg .node text.s,.orch-svg .hub text.s{fill:rgba(255,255,255,.62);font-size:7.6px;font-weight:400;font-family:var(--mono)}
+.orch-svg .node text{fill:#fff;font-size:10.5px;font-weight:600}
+.orch-svg .node text.s,.orch-svg .hub text.s{fill:rgba(255,255,255,.66);font-size:7.4px;font-weight:400;font-family:var(--mono);letter-spacing:0}
 .orch-svg .sub-node circle{fill:rgba(30,27,75,.9);stroke:rgba(196,181,253,.5);stroke-width:1}
 .orch-svg .sub-node text{fill:#DDD6FE;font-size:9px;font-family:var(--mono)}
 .orch-svg .hub circle{fill:#2E1065;stroke:#F0ABFC;stroke-width:2;filter:drop-shadow(0 0 14px rgba(240,171,252,.6))}
 .orch-svg .hub text{fill:#fff;font-size:11.5px;font-weight:700}
 .orch-svg .pill rect{fill:rgba(255,255,255,.07);stroke:rgba(255,255,255,.28);stroke-width:1;animation:pillpulse 8s ease-in-out infinite}
-.orch-svg .pill text{fill:#fff;font-size:9.5px;font-weight:600;font-family:var(--mono);letter-spacing:.02em}
+.orch-svg .pill text{fill:#fff;font-size:9.2px;font-weight:600;font-family:var(--mono);letter-spacing:0}
 @keyframes pillpulse{0%,12%,100%{fill:rgba(255,255,255,.07);stroke:rgba(255,255,255,.28)}5%{fill:rgba(240,171,252,.35);stroke:#F0ABFC}}
 .orch-pts{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin-top:10px;padding-top:12px;border-top:1px solid rgba(255,255,255,.14)}
 .orch-pts li{font-size:11.5px;line-height:1.4;color:rgba(255,255,255,.72);font-family:var(--sans)}
