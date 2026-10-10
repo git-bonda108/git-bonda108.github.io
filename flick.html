@@ -53,6 +53,15 @@
 </div></section>
 
 <section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">MCP integration</span><h2>Systems of record behind a stable, typed boundary.</h2></div><p class="side">Each enterprise system is fronted by one MCP server with a small typed surface, four to eight tools, mapped to that system's bounded context. The model sees a stable schema; the server owns the source system's quirks.</p></div>
+  <div class="grid3">
+    <div class="panel reveal"><h3>Scoped, not sprawling</h3><p>Each agent sees only the servers its job needs: Parser sees none, Matcher sees contracts and purchase, Reconciler sees meter and ledger. Tool surfaces are audited for capability bloat before every release, because every unused tool is routing noise, attack surface and tokens.</p></div>
+    <div class="panel reveal"><h3>Idempotent and versioned</h3><p>Every write carries an idempotency key derived from the reconciliation run identifier, so a re-drive or a double click is a no-op, never a duplicate. A new tool version is a schema change the model can see; old versions keep serving until every caller has moved.</p></div>
+    <div class="panel reveal"><h3>Identity at every endpoint</h3><p>Agents reach servers via Managed Identity; each server holds its own least-privilege service account for the system behind it. Every call carries a correlation ID into Application Insights, so a failure three hops downstream is traced back to its cause.</p></div>
+  </div>
+</div></section>
+
+<section class="light"><div class="wrap">
   <div class="sec-head reveal"><div><span class="label">Agents</span><h2>One job each, one clean handoff between.</h2></div><p class="side">The contract: no agent may emit a claim it cannot support with a cited chunk retrieved this run. No agent may edit another agent's citations. Every mutating action is idempotent, versioned and reversible.</p></div>
   <div class="grid3">
     <div class="agent reveal"><span class="k">Manager</span><span class="r">the supervisor</span><span class="io">trigger + invoice → ReconciliationRun</span><p>Plans the agent chain, dispatches each stage, tracks state through a durable checkpoint, owns token budgets per run, per agent, per model.</p></div>
@@ -65,7 +74,7 @@
   </div>
 </div></section>
 
-<section class="light"><div class="wrap">
+<section class="light-2"><div class="wrap">
   <div class="sec-head reveal"><div><span class="label">Evaluation harness</span><h2>Quality is measured, not asserted.</h2></div><p class="side">Every prompt change, model bump and agent revision runs against a golden set before it reaches production traffic.</p></div>
   <div class="two">
     <div class="panel reveal"><h3>The golden dataset</h3><p>Two hundred historical reconciliations hand-labelled by finance analysts across twelve months of production data. Weighted toward the tail: 40% straightforward, 40% amber-tier variances, 20% red-tier disputes. Each item carries ground-truth tier, variance category and a short human rationale.</p><div class="metrics"><div class="metric"><b>200</b><span>labelled cases</span></div><div class="metric"><b>96%</b><span>variance-detection recall</span></div><div class="metric"><b>22%</b><span>human-touch rate · target 15%</span></div></div></div>
@@ -87,13 +96,37 @@
   </div>
 </div></section>
 
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Production hardening</span><h2>Hardened for the tail, not the demo.</h2></div><p class="side">The unhappy paths decide whether a system is trusted with money. Every control below is named after the failure it prevents, and each one was walked before the pilot took live traffic.</p></div>
+  <p class="intro reveal">The platform is run as a production service, not as a model with a chat window. It has latency and error-rate objectives per stage, a health check per agent, and breakers that degrade rather than fail: a tripped MCP server returns a cached read or defers the run, it never stalls the queue. Binary-correctness work, variance arithmetic, tier thresholds and ledger postings, is plain code. Model weights, prompt versions, tool definitions and runtime configuration are pinned per run, so any reconciliation can be replayed exactly.</p>
+  <div class="grid4 hard">
+    <div class="panel reveal"><h3>Reliability</h3><ul class="checks"><li>Circuit breakers on every external tool call; open breaker → cached read or deferral</li><li>Retries with exponential backoff and shared jitter on 429 / 502 / 503 / 504</li><li>Idempotency keys on every mutating call; a re-drive is a no-op</li><li>Timeouts at every layer, decreasing client → tool; slow tools raise specific errors, not stalls</li><li>Two-provider LLM strategy; fallback on credit exhaustion, quota block or auth revocation, logged per event</li><li>Model version pinned per run; structured error taxonomy on every failure</li></ul></div>
+    <div class="panel reveal"><h3>Security &amp; identity</h3><ul class="checks"><li>Managed Identity between every layer; zero long-lived secrets; Key Vault 30-day rotation</li><li>Conditional Access; MFA for mutating actions</li><li>Content Safety on every prompt and response: jailbreaks, injection in invoice text, PII exfiltration</li><li>PII redaction at ingress: names, phones, tax identifiers scrubbed before embedding</li><li>Least-privilege MCP tokens; each server its own service account</li><li>Prompt-injection defence: untrusted text enters tagged as data, never as instruction</li></ul></div>
+    <div class="panel reveal"><h3>Cost &amp; governance</h3><ul class="checks"><li>Per-user daily cost caps</li><li>Per-run budget accounting: input, output, cache reads and writes, per agent and model; the Manager halts a run that exceeds its budget</li><li>Prompt versioning in an immutable store; rollback is one commit</li><li>Approval gates above threshold; no action executes without the gate</li><li>Data residency: at rest and in transit, the customer's home region</li><li>Retention: 7 years financial, 90 days run bundles; GDPR erasure path</li></ul></div>
+    <div class="panel reveal"><h3>Deployment &amp; DR</h3><ul class="checks"><li>Bicep infrastructure as code; dev → prod parity</li><li>Blue/green slots; ramp over 30 minutes with auto-rollback on error-rate regression</li><li>Cross-region replication; MCP servers active-active</li><li>RTO 4 h · RPO 15 min; failover exercised quarterly</li><li>Nightly restore tests against a scratch environment</li><li>Network egress restricted; container-based execution</li></ul></div>
+  </div>
+</div></section>
+
 <section class="light-2"><div class="wrap">
-  <div class="sec-head reveal"><div><span class="label">Production hardening</span><h2>Hardened for the tail, not the demo.</h2></div><p class="side">The unhappy paths decide whether a system is trusted with money. This is the checklist walked before every release.</p></div>
-  <div class="grid4">
-    <div class="panel reveal"><h3>Reliability</h3><ul class="checks"><li>Circuit breakers on every external tool call</li><li>Retries with exponential backoff and shared jitter</li><li>Idempotency keys on every mutating call</li><li>Timeouts at every layer, decreasing client → tool</li><li>Two-provider LLM strategy with automatic fallback</li><li>Model version pinned per run</li></ul></div>
-    <div class="panel reveal"><h3>Security &amp; identity</h3><ul class="checks"><li>Managed Identity everywhere; zero long-lived secrets</li><li>Conditional Access; MFA for mutating actions</li><li>Content Safety on every prompt and response</li><li>PII redaction at ingress</li><li>Least-privilege MCP tokens</li><li>Prompt-injection defence: untrusted text is data</li></ul></div>
-    <div class="panel reveal"><h3>Cost &amp; governance</h3><ul class="checks"><li>Per-user daily cost caps</li><li>Per-run budget accounting per agent, per model</li><li>Prompt versioning in an immutable store</li><li>Content approval gates above threshold</li><li>Data residency in the customer's region</li><li>Retention: 7 years financial, 90 days run bundles</li></ul></div>
-    <div class="panel reveal"><h3>Deployment &amp; DR</h3><ul class="checks"><li>Bicep infrastructure as code; dev → prod parity</li><li>Blue/green slots; ramped release with auto-rollback</li><li>Cross-region replication; MCP servers active-active</li><li>RTO 4 h · RPO 15 min; failover exercised quarterly</li><li>Nightly restore tests against a scratch environment</li></ul></div>
+  <div class="sec-head reveal"><div><span class="label">Governance, safety &amp; guardrails</span><h2>Four layers of guardrail, sized to the blast radius of a mistake.</h2></div><p class="side">A reconciliation that posts to a ledger can move real money. So the input is filtered, the prompt is constrained, the output is validated and the tools are limited in code, and the heaviest control sits where the action is hardest to undo.</p></div>
+  <div class="stack-l reveal">
+    <div class="lrow"><b class="v">Input guardrails</b><div class="chips"><span>Entra identity on every request</span><span>Content Safety on every prompt</span><span>PII redaction at ingress</span><span>Invoice text tagged as untrusted data</span><span>Parser keeps a source span per field across 40+ supplier formats</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b>System-prompt constraints</b><div class="chips"><span>No claim without a chunk retrieved this run</span><span>No agent edits another agent's citations</span><span>Ranked candidates, not hard picks, when ambiguous</span><span>Amber and red are valid outcomes</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="a">Output guardrails</b><div class="chips"><span>Typed state between every agent</span><span>Critic on a second LLM vendor, default position: disagreement</span><span>Confidence tier calibrated on six months of history (Brier 0.06, ECE 0.02)</span><span>Every factual claim in the report carries a citation</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="g">Programmatic controls</b><div class="chips"><span>Least-privilege MCP tokens per server</span><span>Idempotent, versioned, reversible writes</span><span>No auto-post above NZD 25,000 a line</span><span>No dispute release without analyst sign-off</span><span>No ledger reversal without manager approval</span><span>Per-run budget halts</span></div></div>
+  </div>
+  <div class="grid3" style="margin-top:24px">
+    <div class="panel reveal"><h3>Humans where it is irreversible</h3><p>Review is an architectural decision, not a checkbox. Green-tier OpEx posts automatically because it is reversible and low-value. Amber waits in an analyst queue with the evidence attached. Red, disputes and reversals need a named person's approval in a Teams card. Reviewers see the variance table and citations, not a transcript, so routine approvals take seconds and real decisions get attention.</p></div>
+    <div class="panel reveal"><h3>Failure modes, designed for</h3><ul class="checks"><li><b>Hallucination</b> — the citation contract plus the Critic; true-reject 0.88</li><li><b>Prompt injection</b> via invoice text — Content Safety and data tagging; the parser never executes instructions</li><li><b>Out-of-distribution input</b> — unfamiliar formats fall to amber, not to a guess; false-positive rate 3.1% at 95% recall</li><li><b>Over-reliance</b> — a rolling 10% of production runs is human-reviewed and corrections feed the golden set monthly</li></ul></div>
+    <div class="panel reveal"><h3>Compliance and transparency</h3><ul class="checks"><li>Data stays in the customer's region at rest and in transit</li><li>Financial records retained 7 years; run bundles 90 days; GDPR erasure path</li><li>Purview for lineage, PII discovery and audit export</li><li>Every decision is a datum: evidence used, variance tolerated, outcome recorded</li><li>Per-supplier dispute-rate trends are reported, so uneven outcomes are visible rather than buried in inboxes</li></ul></div>
+  </div>
+  <div class="fm reveal" style="margin-top:24px">
+    <div class="hd">Failure mode</div><div class="hd">Control</div><div class="hd">Evidence</div>
+    <div class="k">MCP server down mid-run</div><div>Breaker opens; cached read or deferral; run resumes from durable checkpoint</div><div class="e">no duplicate postings in pilot</div>
+    <div class="k">Primary LLM provider blocked</div><div>Automatic fallback to Azure OpenAI; Critic degrades to single-vendor mode, logged</div><div class="e">each fallback logged per event</div>
+    <div class="k">Analyst double-clicks Approve</div><div>Idempotency key from the run identifier; second click is a no-op</div><div class="e">idempotent on every path</div>
+    <div class="k">Tariff drift the rules miss</div><div>Statistical classifier for tail cases; amber tier; human review sample</div><div class="e">96% variance-detection recall</div>
+    <div class="k">Prompt or model regression</div><div>Golden-set regression overnight; 5% canary; ramp with auto-rollback beyond change budget</div><div class="e">2-point per-agent alarm</div>
   </div>
 </div></section>
 

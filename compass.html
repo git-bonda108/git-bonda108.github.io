@@ -24,6 +24,18 @@
 </div></section>
 
 <section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Solution architecture</span><h2>Four ways in, one engine, nothing left to the model that code can do.</h2></div><p class="side">Each door authenticates differently and all resolve the same identity and scope. The engine is one deployable: versioned, health-checked and rollback-able in a single command.</p></div>
+  <div class="stack-l reveal">
+    <div class="lrow"><b class="v">Front doors</b><div class="chips"><span>Teams / Copilot Studio connector</span><span>D365 Agent Factory landing-zone tile</span><span>Web console and admin</span><span>Five MCP tool packs for packaged agents</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b>Engine</b><div class="chips"><span>FastAPI on Azure App Service · v3.7.0</span><span>Schema-constrained planner</span><span>Access policy · role ∩ pack</span><span>Answer composition with provenance</span><span>Trace spine</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b>Models</b><div class="chips"><span>gpt-4.1 for planning</span><span>gpt-4.1-mini where it is enough</span><span>text-embedding-3-large</span><span>Azure AI Foundry, australiaeast, in-region</span><span>No arithmetic by the model</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="a">Live Dynamics 365</b><div class="chips"><span>F&amp;O OData · 39 entities · read-only by construction</span><span>Company-scoped reads</span><span>Native ERP MCP brokered read-only through Compass</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="g">Knowledge and stores</b><div class="chips"><span>Azure AI Search / Foundry IQ agentic retrieval</span><span>36 knowledge cards · 4 SOPs ingested</span><span>Table + Blob: episodes, battery runs, exemplars, access profiles</span><span>Statistics in traces, never business content</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="g">Identity and operations</b><div class="chips"><span>Entra ID · Easy Auth · Compass Agent API registration</span><span>Application Insights</span><span>GitHub Actions: CI and nightly canary</span><span>SemVer tags · ADR log</span></div></div>
+  </div>
+</div></section>
+
+<section class="light"><div class="wrap">
   <div class="sec-head reveal"><div><span class="label">Access &amp; security</span><h2>Read-only by construction. Scoped to the person, every time.</h2></div></div>
   <div class="grid3">
     <div class="panel reveal"><h3>No write path exists</h3><p>The Dynamics client has no write method. Write, form and action tools are never exposed and are refused by name, proven every night by the adversarial cases.</p></div>
@@ -35,7 +47,7 @@
   </div>
 </div></section>
 
-<section class="light"><div class="wrap">
+<section class="light-2"><div class="wrap">
   <div class="sec-head reveal"><div><span class="label">Evaluation harness</span><h2>How well it is tested.</h2></div><p class="side">Evaluation-first: the battery is written before changes, gates every release, and re-runs against production every night.</p></div>
   <div class="two">
     <div class="panel reveal"><h3>Seven layers of evidence</h3><ul class="funnel">
@@ -54,13 +66,37 @@
   </div>
 </div></section>
 
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Production hardening</span><h2>The platform explains itself.</h2></div><p class="side">Fourteen releases in fourteen weeks: each one gated, each one reversible in a single command, and every failure files its own report.</p></div>
+  <p class="intro reveal">Compass is operated as a service with a version it can report, a known-good state it can return to, and a nightly check that is harder on it than its users are. Observability is end to end: an answer's episode records the tools called, what retrieval returned, which checks ran and how long each took, so a wrong answer is traced to the step that produced it rather than to the model in general. Dependencies, lint rules and the judge's calibration set are pinned, so a regression is a change someone made, not drift nobody can find.</p>
+  <div class="grid4 hard">
+    <div class="panel reveal"><h3>Releases</h3><ul class="checks"><li>Rollback bookmark: a reproducible known-good deploy zip and tag; stepping back is one command</li><li>Release gate: the on-demand canary must be green (v3.7.0: 88/88, judge 82/85)</li><li>Zero-downtime versioned deploys; the health endpoint reports the live version for warm-poll verification</li><li>SemVer tags v1.0 → v3.7.0; Conventional Commits</li></ul></div>
+    <div class="panel reveal"><h3>CI on every commit</h3><ul class="checks"><li>Ruff (pinned) and 24 offline unit tests</li><li>Dependency audit and an SBOM per build</li><li>Secret scan over the whole history</li><li>Self-diagnosing failures: a red night files a GitHub issue with the failing cases and run link, proven 15 and 30 Sep</li></ul></div>
+    <div class="panel reveal"><h3>Controls and kill switches</h3><ul class="checks"><li>Per-client MCP keys with rate limits</li><li>The landing-zone surface switches off in one setting</li><li>Content-boundary rule on by default</li><li>Honest retries: a failed case is retried once and the first answer is kept, so a flaky wording cannot hide</li><li>Least-privilege F&amp;O application user over the 39 entities, recipe published</li></ul></div>
+    <div class="panel reveal"><h3>Decisions on record</h3><ul class="checks"><li>ADR 0001–0006: baseline conformance, packaged agents, portable battery, trace spine and judge, canary gate, landing-zone surface</li><li>Factory ADR 0115 for the externally hosted agent pattern</li><li>Playbooks, a spec per packaged agent, security documentation</li><li>Evidence workbook for the 28/28 acceptance</li></ul></div>
+  </div>
+</div></section>
+
 <section class="light-2"><div class="wrap">
-  <div class="sec-head reveal"><div><span class="label">Production hardening</span><h2>The platform explains itself.</h2></div></div>
-  <div class="grid4">
-    <div class="panel reveal"><h3>Releases</h3><ul class="checks"><li>Rollback bookmark: a known-good deploy, one command</li><li>Release gate: on-demand canary must be green</li><li>Zero-downtime versioned deploys with a health endpoint</li><li>SemVer tags v1.0 → v3.7.0, Conventional Commits</li></ul></div>
-    <div class="panel reveal"><h3>CI on every commit</h3><ul class="checks"><li>Ruff (pinned), unit tests</li><li>Dependency audit and SBOM</li><li>Secret scan over history</li><li>Self-diagnosing failures file their own issue</li></ul></div>
-    <div class="panel reveal"><h3>Controls</h3><ul class="checks"><li>Per-client MCP keys with rate limits</li><li>Landing-zone surface switches off in one setting</li><li>Content-boundary rule on by default</li><li>Honest retries: a flaky wording cannot hide</li></ul></div>
-    <div class="panel reveal"><h3>Decisions on record</h3><ul class="checks"><li>ADR 0001–0006: baseline, packaged agents, portable battery, trace spine &amp; judge, canary gate, landing-zone surface</li><li>Factory ADR 0115 for the externally hosted agent pattern</li><li>Playbooks, specs per packaged agent, security docs</li></ul></div>
+  <div class="sec-head reveal"><div><span class="label">Governance, safety &amp; guardrails</span><h2>Lighter where the blast radius is small, heavier where it matters, adversarial every night.</h2></div><p class="side">Compass cannot write to the ERP, so its heaviest controls are on who may see what, on honesty about confidence, and on proving every night that the fence still holds.</p></div>
+  <div class="stack-l reveal">
+    <div class="lrow"><b class="v">Input guardrails</b><div class="chips"><span>Entra sign-in or validated bearer: signature, tenant, audience, expiry, scope</span><span>App-only tokens refused</span><span>Origin-restricted landing-zone door</span><span>Retrieved content treated as untrusted input, never as instruction</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b>System-prompt constraints</b><div class="chips"><span>Plan under a schema; tools only from the person's pack</span><span>No arithmetic by the model</span><span>Name the company, cite the source, state confidence</span><span>Decline and log a gap rather than guess</span><span>No-overpromise rule (tightened in v3.6.2)</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="a">Output guardrails</b><div class="chips"><span>Answer-integrity guards before the reply leaves</span><span>Independent judge: groundedness, intent, tool accuracy, task adherence, completeness</span><span>Judge calibrated at 95% agreement with humans</span><span>Honest zero when there is no stock</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="g">Programmatic controls</b><div class="chips"><span>No write method exists in the Dynamics client</span><span>Write, form and action tools refused by name</span><span>Role ∩ pack; a pack can never widen a role</span><span>Finance views behind a deny-list</span><span>Per-client keys, rate limits, one-setting kill switch</span></div></div>
+  </div>
+  <div class="grid3" style="margin-top:24px">
+    <div class="panel reveal"><h3>Humans in the loop, deliberately placed</h3><p>No person approves a read, because a read is reversible and the scoping is enforced in code. Humans sit where judgement matters: a 20-case calibration set anchors the judge to human review; an editor's approval can promote an episode to a gold exemplar, and every exemplar is inspectable and deletable; every red night is read by a person before the fix ships; business sign-off closes each packaged agent.</p></div>
+    <div class="panel reveal"><h3>Failure modes, designed for</h3><ul class="checks"><li><b>Hallucination</b> — figures computed in code with provenance; judge scores groundedness against what the tools returned</li><li><b>Prompt injection</b> — twelve permanent adversarial cases: injection, disclosure, authority-framed writes, role escalation, PII probes, tool misuse</li><li><b>Out-of-distribution questions</b> — "no confident answer" is a real answer and files a knowledge gap</li><li><b>Over-reliance</b> — every answer names its sources and confidence; "not visible to your role" is said plainly</li></ul></div>
+    <div class="panel reveal"><h3>Compliance and transparency</h3><ul class="checks"><li>Models and retrieval in-region (australiaeast); data stays in the tenant</li><li>Traces hold statistics, never business content</li><li>Per-person scoping: roles, legal entity and store follow the signed-in person through every door</li><li>OWASP Top 10 for LLM and Agentic Applications: written assessment, tests nightly</li><li>Red nights published honestly: 6 of 32, each one explained</li></ul></div>
+  </div>
+  <div class="fm reveal" style="margin-top:24px">
+    <div class="hd">Failure mode</div><div class="hd">Control</div><div class="hd">Evidence</div>
+    <div class="k">Agent asked to change an order "on the CFO's authority"</div><div>No write path exists; refused by name; adversarial case ADV-series runs nightly</div><div class="e">12 / 12 refused, every night</div>
+    <div class="k">Agent refuses correctly, then offers to fetch what it cannot</div><div>No-overpromise rule tightened; deterministic guard planned to close ADV-10</div><div class="e">found by the suite, fixed in v3.6.2</div>
+    <div class="k">Token from another tenant or an app-only token</div><div>Fail-closed validation of signature, tenant, audience, expiry, scope; app-only refused</div><div class="e">24 unit tests, 28/28 acceptance</div>
+    <div class="k">Document refresh silently changes answers</div><div>Nightly canary against production with comparable baselines; regression analysis per case</div><div class="e">functional packs 76 / 76 green nightly</div>
+    <div class="k">Harness itself flakes</div><div>Retry on exception, first answer recorded; a red files a diagnosed issue</div><div class="e">1 harness red, fixed v3.6.1</div>
   </div>
 </div></section>
 

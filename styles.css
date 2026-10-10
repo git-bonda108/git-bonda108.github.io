@@ -40,7 +40,8 @@ section{padding:clamp(72px,9vw,120px) 0}
 .brand{display:flex;flex-direction:column;line-height:1.1}
 .brand b{font-family:var(--serif);font-weight:400;font-size:21px;letter-spacing:-.01em}
 .brand small{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-top:4px}
-.links{display:flex;gap:30px;font-size:14.5px;font-weight:500}
+.links{display:flex;gap:20px;font-size:14px;font-weight:500}
+.nav .btn{white-space:nowrap;padding:10px 16px;font-size:13.5px}
 .links a{color:var(--ink-2);padding:6px 0;border-bottom:1px solid transparent}
 .links a:hover{color:var(--ink);border-color:var(--ink)}
 .actions{display:flex;gap:10px}
@@ -204,8 +205,10 @@ footer a{color:var(--ink-2);margin-left:22px}
 .pm .v{font-family:var(--mono);font-size:30px;font-weight:500;letter-spacing:-.03em;margin:6px 0 2px}
 .pm small{color:var(--ink-3);font-size:13px}
 .checks{list-style:none;display:flex;flex-direction:column;gap:9px;font-size:14.5px;color:var(--ink-2)}
-.checks li{display:grid;grid-template-columns:18px 1fr;gap:10px}
-.checks li::before{content:"✓";color:var(--green);font-family:var(--mono)}
+.checks li{position:relative;padding-left:28px}
+.checks li::before{content:"✓";color:var(--green);font-family:var(--mono);position:absolute;left:0;top:0}
+.checks li b{color:var(--ink);font-weight:600}
+.grid4.hard{grid-template-columns:repeat(2,1fr)}
 .dark .tile{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#fff}.tile{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;font-size:14.5px}
 .tile .st{align-self:flex-start;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
 .tile .st.done{background:#D1FAE5;color:#065F46}.tile .st.build{background:#FEF3C7;color:#92400E}.tile .st.plan{background:#E5E7EB;color:#374151}
@@ -251,3 +254,41 @@ html.js .reveal.in{opacity:1;transform:none}
 .hero .btn-outline{border-color:rgba(255,255,255,.4);color:#fff}.hero .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.06)}
 .hero .btn-ghost{color:rgba(255,255,255,.78)}.hero .btn-ghost:hover{color:#fff}
 .hero .btn-primary{background:var(--mint);color:var(--deep)}.hero .btn-primary:hover{background:#8AF0E1}
+
+/* portfolio tiles · architecture soundness · guardrail stack */
+.card .checks.two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin:4px 0 6px}
+.ptiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ptile{display:flex;flex-direction:column;gap:8px;background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;color:var(--ink);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.ptile:hover{transform:translateY(-3px);border-color:var(--teal);box-shadow:0 2px 4px rgba(11,31,46,.05),0 18px 40px -22px rgba(11,31,46,.35)}
+.ptile .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+.ptile h3{font-size:21px;line-height:1.2}
+.ptile p{font-size:14.5px;color:var(--ink-2);flex:1}
+.ptile .proof{font-size:13px;color:var(--ink-3);padding-top:10px;border-top:1px solid var(--line)}
+.ptile .proof::before{content:"✓ ";color:var(--green);font-family:var(--mono)}
+.ptile .go{font-size:14px;font-weight:600;color:var(--teal)}
+.domains{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.domain{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px;display:flex;flex-direction:column;gap:12px}
+.domain.accent{grid-column:span 2;background:var(--deep);color:#fff;border-color:var(--deep-2)}
+.domain .dh{display:flex;align-items:center;gap:12px}
+.domain .dh i{font-family:var(--mono);font-style:normal;font-size:13px;color:var(--teal);font-weight:500}
+.domain.accent .dh i{color:var(--mint)}
+.domain .dh b{font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:-.01em}
+.domain p{font-size:15px;color:var(--ink-2)}
+.domain.accent p{color:rgba(255,255,255,.8)}
+.where{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+.where li{display:grid;grid-template-columns:132px 1fr;gap:12px;font-size:14px;color:var(--ink-2);align-items:baseline}
+.where li b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:500}
+.guard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
+.glayer{border:1px solid rgba(255,255,255,.16);border-top:3px solid var(--mint);border-radius:12px;padding:14px 16px;background:rgba(255,255,255,.05)}
+.glayer b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);margin-bottom:6px}
+.glayer span{font-size:13.5px;color:rgba(255,255,255,.82);line-height:1.5}
+.gnote{font-size:14px;color:rgba(255,255,255,.7)!important;margin-top:4px}
+.fm{display:grid;grid-template-columns:1.1fr 1.4fr 1fr;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.fm>div{padding:14px 18px;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink-2)}
+.fm .hd{border-top:0;background:var(--paper-2);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.fm .k{color:var(--ink);font-weight:600}
+.fm .e{font-family:var(--mono);font-size:13px;color:var(--teal)}
+.intro{max-width:72ch;color:var(--ink-2);font-size:16.5px;margin-bottom:28px}
+@media (max-width:1024px){.ptiles{grid-template-columns:repeat(2,1fr)}.domains{grid-template-columns:1fr}.domain.accent{grid-column:span 1}.guard{grid-template-columns:1fr 1fr}.fm{grid-template-columns:1fr}.fm .hd:not(:first-child){display:none}}
+@media (max-width:720px){.ptiles{grid-template-columns:1fr}.grid4.hard{grid-template-columns:1fr}.guard{grid-template-columns:1fr}.where li{grid-template-columns:1fr;gap:2px}.card .checks.two-col{grid-template-columns:1fr}}
+.ptiles>*,.domains>*,.guard>*,.fm>*{min-width:0}

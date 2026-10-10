@@ -56,6 +56,21 @@
   </div>
 </div></section>
 
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Governance, safety &amp; guardrails</span><h2>The guarantee lives below the model layer.</h2></div><p class="side">A fabricated $500 can lose a half-million-dollar sale, so the controls are proportionate: the model may read, align and narrate; only code may produce a number that reaches a customer.</p></div>
+  <div class="stack-l reveal">
+    <div class="lrow"><b class="v">Input guardrails</b><div class="chips"><span>Federated identity (OIDC / SAML); the app never sees a password</span><span>Six-layer upload validation: client check, Zod schema, size 413, page count 422, text-layer 422 or OCR, reasoning budget</span><span>SSRF guard on every outbound fetch: loopback, private, link-local and reserved ranges refused</span><span>No customer PII collected; comparisons keyed by project address</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b>System-prompt constraints</b><div class="chips"><span>Every priced row needs a page and a verbatim snippet</span><span>Missing quantities become review items, never estimates</span><span>Chat edits go through the same endpoint as manual edits</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="a">Output guardrails</b><div class="chips"><span>Pydantic-typed output on every agent; a shape the schema rejects is retried, then halts the pipeline with an explicit error</span><span>Cross-model verifier on a different model, temperature and prompt</span><span>Pure-code substring tripwire; Unconfirmed is sticky</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="g">Programmatic controls</b><div class="chips"><span>Decimal arithmetic; headline blocks at $0 while any row is Unconfirmed</span><span>IDOR guard: centralised access check, non-owner gets 404</span><span>Every MCP tool server authenticated and audit-logged; search and fetch hard-scoped</span><span>Append-only edit history with actor, timestamp, before and after; seven-year retention</span><span>Model identifier tagged on every agent call so a fleet change is traceable</span></div></div>
+  </div>
+  <div class="grid3" style="margin-top:24px">
+    <div class="panel reveal"><h3>Humans where the money is</h3><p>The consultant resolves every ambiguity before totals unlock, and only an explicit human action clears an Unconfirmed row, an action that itself has to pass the tripwire. Routine rows need no touch; the system asks only about what the source genuinely does not say.</p></div>
+    <div class="panel reveal"><h3>Failure modes, designed for</h3><ul class="checks"><li><b>Hallucinated prices</b> — three walls from different ingredients; 63 assertions, zero fabricated figures</li><li><b>Injection via a quote PDF or a design page</b> — PDFs are data; pages are fetched under the SSRF guard and never executed</li><li><b>Scanned, image-only PDFs</b> — a specific 422 by default; opt-in vision OCR, about ten seconds a page</li><li><b>Over-reliance</b> — every cell is source-linked and inline-editable; an INTERNAL banner on every export</li></ul></div>
+    <div class="panel reveal"><h3>Observability and replay</h3><ul class="checks"><li>SSE stream reports every agent handoff; reconnect-safe with sequence numbers and reasoning heartbeats</li><li>Because compute and tripwire are pure code, any recorded comparison replays offline against the current engine</li><li>Self-verifying suites print the exact assertion that broke and exit non-zero</li></ul></div>
+  </div>
+</div></section>
+
 <section class="dark"><div class="wrap">
   <div class="cta-row reveal" style="border:0;margin:0;padding:0"><h2>If a single fabricated figure can cost you the deal, this is how I build.</h2><div class="ctas" style="margin:0"><a class="btn btn-primary" href="mailto:bonda.career@gmail.com">Let's talk</a><a class="btn btn-outline" href="index.html#work">All work →</a></div></div>
 </div></section>
