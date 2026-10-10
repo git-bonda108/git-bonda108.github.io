@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
+<title>Compass — live Dynamics 365 agent · Case study · Satya Bonda</title>
+<meta name="description" content="A read-only Dynamics 365 F&amp;O agent that gives cited, company-scoped answers in Teams, the web and MCP packs, tested against production every night by an 88-case battery and an LLM judge.">
+</head><body>
+<nav class="nav"><div class="wrap"><a class="brand" href="index.html"><b>Satya Bonda</b><small>← all work</small></a><div class="links"><a href="flick.html">Flick</a><a href="compass.html">Compass</a><a href="quote-intelligence.html">Quote Intelligence</a><a href="index.html#contact">Contact</a></div><div class="actions"><a class="btn btn-outline" href="assets/Satya_Bonda_Principal_AI_Engineer_Resume.pdf" target="_blank" rel="noopener">Résumé PDF</a><a class="btn btn-primary" href="mailto:bonda.career@gmail.com">Let's talk</a></div><button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+<header class="hero cs-hero"><div class="wrap" style="display:block">
+  <span class="label">Case study · client delivery · Jun – Oct 2026 · v3.7.0 live</span>
+  <h1>Compass: one assistant across live Dynamics 365 and the business's own know-how</h1>
+  <p class="lead">Staff ask in plain English and get sourced, company-scoped answers with a stated confidence: orders, stock, customers, store context, and the how-to behind them. It runs in Teams, a web console, five MCP tool packs and the shared D365 Agent Factory landing zone. One engine behind every door.</p>
+  <div class="metrics"><div class="metric"><b>88</b><span>release battery · green nightly</span></div><div class="metric"><b>95%</b><span>judge agreement with human review</span></div><div class="metric"><b>3,738</b><span>answers with an evidence trace</span></div><div class="metric"><b>v1 → v3.7</b><span>14 releases in 14 weeks</span></div></div>
+  <div class="facts"><div><b>My role</b><p>Principal AI Engineer. Architecture, the planner and tool layer, access policy, the evaluation harness, CI and nightly canary, and the landing-zone integration reviewed and merged by the platform owner.</p></div><div><b>Stack</b><p>FastAPI on Azure App Service · GPT-4.1 / 4.1-mini and text-embedding-3-large on Azure AI Foundry · Dynamics 365 F&amp;O OData (39 entities, read-only) · Azure AI Search / Foundry IQ · Table + Blob storage · Entra ID · Application Insights · GitHub Actions</p></div><div><b>Governance</b><p>Microsoft Zero Trust principles, OWASP LLM &amp; Agentic Top 10 assessment, six ADRs, SBOM and secret scanning on every commit, one-command rollback.</p></div></div>
+</div></header>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">How a question flows</span><h2>Six steps from sign-in to a cited answer.</h2></div><p class="side">Figures are computed in code with provenance. "Not visible to your role" and "no confident answer" are real answers, never guesses.</p></div>
+  <div class="grid3">
+    <div class="step reveal"><div class="h"><i>01</i><b>Sign in</b></div><p>Teams, the landing zone or the web console establishes who is asking through Entra ID.</p></div>
+    <div class="step reveal"><div class="h"><i>02</i><b>Resolve scope</b></div><p>Compass maps the person to their F&amp;O user: roles, default legal entity, store context. Admin profiles can override.</p></div>
+    <div class="step reveal"><div class="h"><i>03</i><b>Plan</b></div><p>The model picks tools under a schema; verified exemplars of similar questions guide the plan.</p></div>
+    <div class="step reveal"><div class="h"><i>04</i><b>Read live</b></div><p>Read-only OData calls to F&amp;O, scoped to the company; knowledge retrieval over the business's own SOPs for the how-to.</p></div>
+    <div class="step reveal"><div class="h"><i>05</i><b>Compose honestly</b></div><p>Figures are computed in code; the answer names the company, cites sources and states confidence, or declines and logs a gap.</p></div>
+    <div class="step reveal"><div class="h"><i>06</i><b>Record</b></div><p>An episode (tools, checks, latency) is written for evaluation. The nightly battery and the judge read the same evidence.</p></div>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Access &amp; security</span><h2>Read-only by construction. Scoped to the person, every time.</h2></div></div>
+  <div class="grid3">
+    <div class="panel reveal"><h3>No write path exists</h3><p>The Dynamics client has no write method. Write, form and action tools are never exposed and are refused by name, proven every night by the adversarial cases.</p></div>
+    <div class="panel reveal"><h3>Role ∩ pack</h3><p>Effective access is always the person's own F&amp;O role intersected with the tool pack. A pack can never widen what a role allows. Finance views stay behind a deny-list.</p></div>
+    <div class="panel reveal"><h3>Fail-closed doors</h3><p>The landing-zone surface validates signature, tenant, audience, expiry and scope; refuses app-only tokens; accepts only the landing zone's origin; refuses anyone it cannot place as an F&amp;O user.</p></div>
+    <div class="panel reveal"><h3>Zero Trust applied</h3><p>Verify every request (Entra sign-in or validated bearer, per-client API keys). Least privilege. Assume breach: external content is treated as untrusted input, never as instructions.</p></div>
+    <div class="panel reveal"><h3>OWASP LLM &amp; Agentic Top 10</h3><p>A written assessment and twelve permanent adversarial cases: injection, disclosure, authority-framed writes, role escalation, PII probes, tool misuse. They run every night.</p></div>
+    <div class="panel reveal"><h3>Supply chain &amp; secrets</h3><p>Pinned dependencies, dependency audit, an SBOM per build, secret scanning over history. No secrets in the repository; runtime settings live in App Service.</p></div>
+  </div>
+</div></section>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Evaluation harness</span><h2>How well it is tested.</h2></div><p class="side">Evaluation-first: the battery is written before changes, gates every release, and re-runs against production every night.</p></div>
+  <div class="two">
+    <div class="panel reveal"><h3>Seven layers of evidence</h3><ul class="funnel">
+      <li><div><b>Trace spine</b>Every answer leaves an episode: tools, retrieval, checks, latency. 3,738 recorded.</div></li>
+      <li><div><b>Release battery</b>88 exact pass/fail cases: order tracker 28, sales 28, retail 20, adversarial 12. Nothing ships without a green run.</div></li>
+      <li><div><b>Independent judge</b>Grades groundedness, intent, tool accuracy, task adherence and completeness against the evidence the tools returned. Calibrated at 95% agreement with human review on a 20-case set.</div></li>
+      <li><div><b>Nightly canary</b>Full judged battery against production at 03:00 AEST, regression analysis against comparable baselines, a Teams card, and a red auto-files a diagnosed GitHub issue.</div></li>
+      <li><div><b>Learning loop</b>Episodes that pass both layers become gold exemplars retrieved as precedents at planning time. 44 verified; inspectable and deletable; no retraining.</div></li>
+      <li><div><b>Business regression</b>The client's original validation workbooks re-run in production and scored with evidence: 46 / 46.</div></li>
+      <li><div><b>Unit tests</b>24 offline tests for token validation, identity, run summaries and router accept/refuse paths, in CI on every commit.</div></li>
+    </ul></div>
+    <div>
+      <div class="panel reveal"><h3>Red nights, honestly</h3><p>32 nights since 3 September: 25 green, 6 red, 1 running. Functional packs 76 / 76 green every night.</p><p>Five of the six reds were one adversarial wording case: the agent refused a write correctly, then offered to fetch. The fence held every time; the first occurrence found a real defect, fixed in v3.6.2 with a tightened no-overpromise rule. One red was a harness timeout, fixed with retry-on-exception and comparable baselines.</p></div>
+      <div class="grid3 reveal" style="margin-top:16px"><div class="pm"><div class="k">Battery</div><div class="v">88/88</div><small>release gate</small></div><div class="pm"><div class="k">Judge</div><div class="v">82/85</div><small>v3.7.0 gate run</small></div><div class="pm"><div class="k">Acceptance</div><div class="v">28/28</div><small>landing zone, live token</small></div></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Production hardening</span><h2>The platform explains itself.</h2></div></div>
+  <div class="grid4">
+    <div class="panel reveal"><h3>Releases</h3><ul class="checks"><li>Rollback bookmark: a known-good deploy, one command</li><li>Release gate: on-demand canary must be green</li><li>Zero-downtime versioned deploys with a health endpoint</li><li>SemVer tags v1.0 → v3.7.0, Conventional Commits</li></ul></div>
+    <div class="panel reveal"><h3>CI on every commit</h3><ul class="checks"><li>Ruff (pinned), unit tests</li><li>Dependency audit and SBOM</li><li>Secret scan over history</li><li>Self-diagnosing failures file their own issue</li></ul></div>
+    <div class="panel reveal"><h3>Controls</h3><ul class="checks"><li>Per-client MCP keys with rate limits</li><li>Landing-zone surface switches off in one setting</li><li>Content-boundary rule on by default</li><li>Honest retries: a flaky wording cannot hide</li></ul></div>
+    <div class="panel reveal"><h3>Decisions on record</h3><ul class="checks"><li>ADR 0001–0006: baseline, packaged agents, portable battery, trace spine &amp; judge, canary gate, landing-zone surface</li><li>Factory ADR 0115 for the externally hosted agent pattern</li><li>Playbooks, specs per packaged agent, security docs</li></ul></div>
+  </div>
+</div></section>
+
+<section class="dark"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">The journey</span><h2>Fourteen releases in fourteen weeks, each one gated.</h2></div></div>
+  <div class="grid4 reveal">
+    <div class="tile"><span>v1.0 · Knowledge agent, self-growing Q&amp;A cards, Entra sign-in, read-only D365 surface</span><span class="st done">Jun–Jul</span></div>
+    <div class="tile"><span>v3.0 · Metadata-grounded analyst: entity oracle, exact joins, arithmetic in code. 30/30 golden battery</span><span class="st done">Jul</span></div>
+    <div class="tile"><span>v3.4 · Legal-entity and role-based access, packaged agents, store context, portable 88-case battery</span><span class="st done">Aug</span></div>
+    <div class="tile"><span>v3.5–3.6 · Trace spine, judged evaluation, OWASP assessment, nightly canary, exemplar loop</span><span class="st done">Sep</span></div>
+    <div class="tile"><span>v3.7.0 · Bearer-validated landing-zone surface, 24 unit tests, Agent API registration</span><span class="st done">Sep</span></div>
+    <div class="tile"><span>Landing zone · PRs merged by the platform owner; tile live; 28/28 acceptance</span><span class="st done">Oct</span></div>
+    <div class="tile"><span>Next · per-user F&amp;O enforcement (on-behalf-of)</span><span class="st build">agreed</span></div>
+    <div class="tile"><span>Next · Manufacturing agent on the proven capability-module pattern</span><span class="st plan">discovery</span></div>
+  </div>
+  <div class="cta-row reveal"><h2>Need an agent that can touch your ERP without ever writing to it?</h2><div class="ctas" style="margin:0"><a class="btn btn-primary" href="mailto:bonda.career@gmail.com">Let's talk</a><a class="btn btn-outline" href="quote-intelligence.html">Next: Quote Intelligence →</a></div></div>
+</div></section>
+<footer><div class="wrap"><span>© 2026 Satya Bonda</span><span><a href="index.html">Home</a><a href="https://github.com/git-bonda108" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/bondagenai/" target="_blank" rel="noopener">LinkedIn</a></span></div></footer><script src="script.js"></script></body></html>

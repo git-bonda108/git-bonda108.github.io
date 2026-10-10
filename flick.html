@@ -1,0 +1,115 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flick — autonomous invoice reconciliation · Case study · Satya Bonda</title>
+<meta name="description" content="A seven-agent LangGraph platform over five MCP servers that reconciles 1,200 supplier invoices a month at 87% first-pass, gated by a 200-case golden set and canary releases.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"></head>
+<body>
+<nav class="nav"><div class="wrap"><a class="brand" href="index.html"><b>Satya Bonda</b><small>← all work</small></a><div class="links"><a href="flick.html">Flick</a><a href="compass.html">Compass</a><a href="quote-intelligence.html">Quote Intelligence</a><a href="index.html#contact">Contact</a></div><div class="actions"><a class="btn btn-outline" href="assets/Satya_Bonda_Principal_AI_Engineer_Resume.pdf" target="_blank" rel="noopener">Résumé PDF</a><a class="btn btn-primary" href="mailto:bonda.career@gmail.com">Let's talk</a></div><button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+<header class="hero cs-hero"><div class="wrap" style="display:block">
+  <span class="label">Case study · client delivery · Apr – May 2026 · programme 75% delivered</span>
+  <h1>Autonomous invoice reconciliation for Flick</h1>
+  <p class="lead">A multi-agent platform that reads every supplier invoice, matches every line against contract, purchase order and consumption evidence, and closes reconciliations with a defensible audit trail. The Finance team no longer opens invoices one at a time. They open a chat.</p>
+  <div class="metrics"><div class="metric"><b>1,200</b><span>invoices / month · pilot</span></div><div class="metric"><b>87%</b><span>first-pass · target 90% at GA</span></div><div class="metric"><b>4.2 min</b><span>time to close · was 47</span></div><div class="metric"><b>7</b><span>agents · one job each</span></div></div>
+  <div class="facts"><div><b>My role</b><p>Principal AI Engineer, forward-deployed. Architecture, agents, MCP servers, evaluation harness and production hardening, inside the client's Azure tenant.</p></div><div><b>Stack</b><p>Python 3.12 · LangGraph · Claude Opus (primary) · Azure OpenAI (fallback) · MCP · Copilot Studio · Azure Container Apps · AI Search · Azure SQL · Bicep · OpenTelemetry</p></div><div><b>Audience</b><p>Sponsor · architect · finance operations. Three tiers of approval; no auto-posting above NZD 25,000 a line.</p></div></div>
+</div></header>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">The problem</span><h2>Consumption invoices are hard for a reason.</h2></div></div>
+  <div class="cols reveal">
+    <p>Reconciling a consumption-based supplier invoice is evidence work, not spreadsheet work. Each line item is a claim: you consumed this much, at this rate, under this clause, during this window. Closing the line means confirming the reading against a meter, the rate against a contract amendment, the window against the billing calendar and the total against a purchase order.</p>
+    <p>Done manually, one invoice takes 30 to 90 minutes of analyst time. The failure modes are quiet and expensive: tariff amendments not carried into billing, meter reads missing from the market feed, misapplied network charges, duplicate charges across cycles. Bad reconciliations either pay money the business does not owe or damage the supplier relationship through over-eager disputes.</p>
+    <p>The manual process also compounds. Every analyst re-learns the same patterns, dispute-rate trends never roll up, and institutional memory sits in inboxes. The platform closes that gap by making every decision a datum: what evidence supported it, what variance was tolerated, what the outcome was.</p>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">How it works</span><h2>Nine steps between an invoice and a posted entry.</h2></div><p class="side">The system walks the same steps a human analyst would, but explicitly, in typed state, with citations at every hop.</p></div>
+  <div class="grid3">
+    <div class="step reveal"><div class="h"><i>01</i><b>Trigger</b></div><p>A user asks the chat bot to reconcile an invoice, or an inbound invoice reaches the ingestion queue by email or API.</p></div>
+    <div class="step reveal"><div class="h"><i>02</i><b>Parse</b></div><p>Parser Agent extracts structured line items from PDF, CSV or EDI with the raw source span for every field.</p></div>
+    <div class="step reveal"><div class="h"><i>03</i><b>Retrieve</b></div><p>Contract, purchase-order and consumption stores are queried over MCP; evidence is attached to shared state with stable identifiers.</p></div>
+    <div class="step reveal"><div class="h"><i>04</i><b>Match</b></div><p>Matcher Agent correlates each line against clause, PO and consumption record, surfacing a ranked candidate list when ambiguous.</p></div>
+    <div class="step reveal"><div class="h"><i>05</i><b>Detect anomalies</b></div><p>Typed checks for tariff drift, missing meter reads, clause mismatch, duplicates, unit-of-measure errors, out-of-window billing.</p></div>
+    <div class="step reveal"><div class="h"><i>06</i><b>Reconcile</b></div><p>Reconciler computes net variance per line and a confidence tier (green, amber, red) calibrated on six months of history.</p></div>
+    <div class="step reveal"><div class="h"><i>07</i><b>Critique</b></div><p>Critic Agent re-reads the set adversarially, on a different LLM vendor. Default position: disagreement.</p></div>
+    <div class="step reveal"><div class="h"><i>08</i><b>Compose</b></div><p>Reporter writes the summary: variance table, plain-English narrative, citations and a recommended action. Teams-native Adaptive Cards.</p></div>
+    <div class="step reveal"><div class="h"><i>09</i><b>Act</b></div><p>Green posts to the ledger. Amber routes to an analyst queue. Red raises a dispute draft held for human release. Every action idempotent and audit-logged.</p></div>
+  </div>
+</div></section>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Architecture</span><h2>Six layers, one typed contract between each.</h2></div><p class="side">Each layer is replaceable in isolation. The Copilot front door can be swapped for a REST client; agents can move to a different LLM; MCP servers can be re-implemented against another system of record.</p></div>
+  <div class="stack-l reveal">
+    <div class="lrow"><b class="v">Front door</b><div class="chips"><span>Copilot Studio bot · Teams · web · REST</span><span>Ingestion queue · email · API · watched folder</span><span>Analyst approval queue · cards · SLA timers</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b>Orchestration</b><div class="chips"><span>Manager Agent · state machine · plan → dispatch → aggregate → emit · durable checkpoint</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b>Domain agents</b><div class="chips"><span>Parser</span><span>Matcher</span><span>Anomaly</span><span>Reconciler</span><span>Reporter</span><span>Critic</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="a">MCP tool layer</b><div class="chips"><span>contracts-mcp</span><span>purchase-mcp</span><span>meter-mcp</span><span>ledger-mcp</span><span>dispute-mcp</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="g">Data · knowledge</b><div class="chips"><span>Azure SQL</span><span>AI Search (vector + hybrid)</span><span>Blob (immutable)</span><span>Metrics DB</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="g">Foundation</b><div class="chips"><span>Claude Opus (primary) · Azure OpenAI (fallback) · Entra ID · Key Vault · Content Safety · App Insights · Purview</span></div></div>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Agents</span><h2>One job each, one clean handoff between.</h2></div><p class="side">The contract: no agent may emit a claim it cannot support with a cited chunk retrieved this run. No agent may edit another agent's citations. Every mutating action is idempotent, versioned and reversible.</p></div>
+  <div class="grid3">
+    <div class="agent reveal"><span class="k">Manager</span><span class="r">the supervisor</span><span class="io">trigger + invoice → ReconciliationRun</span><p>Plans the agent chain, dispatches each stage, tracks state through a durable checkpoint, owns token budgets per run, per agent, per model.</p></div>
+    <div class="agent reveal"><span class="k">Parser</span><span class="r">reads every invoice</span><span class="io">PDF · CSV · EDI → normalised line items</span><p>Preserves page and paragraph anchors for every field; handles supplier quirks; returns per-field confidence. F1 0.94 across 40+ formats.</p></div>
+    <div class="agent reveal"><span class="k">Matcher</span><span class="r">correlates lines to evidence</span><span class="io">line + retrieval hits → ranked candidates</span><p>Emits a ranked list, not a hard pick, so downstream tiers can factor in ambiguity. Precision@1 0.91, recall@3 0.98.</p></div>
+    <div class="agent reveal"><span class="k">Anomaly Detector</span><span class="r">flags variances</span><span class="io">matched line + evidence → typed variances</span><p>Rules engine plus statistical classifier for tail cases. False-positive rate 3.1% at 95% recall.</p></div>
+    <div class="agent reveal"><span class="k">Reconciler</span><span class="r">computes tier and confidence</span><span class="io">matched line + anomalies → tier · action</span><p>Composes match strength, severity and historical calibration into green / amber / red. Brier 0.06, ECE 0.02.</p></div>
+    <div class="agent reveal"><span class="k">Reporter</span><span class="r">composes the narrative</span><span class="io">reconciled set → narrative · card · citations</span><p>Every factual claim carries a citation. Teams Adaptive Cards natively; Markdown elsewhere.</p></div>
+    <div class="agent critic reveal"><span class="k">Critic</span><span class="r">adversarial gate</span><span class="io">candidate → approve · route to review</span><p>Runs on a different LLM vendor. Looks for unsupported claims, weak citations, tier inflation. True-reject 0.88, false-reject 0.04.</p></div>
+  </div>
+</div></section>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Evaluation harness</span><h2>Quality is measured, not asserted.</h2></div><p class="side">Every prompt change, model bump and agent revision runs against a golden set before it reaches production traffic.</p></div>
+  <div class="two">
+    <div class="panel reveal"><h3>The golden dataset</h3><p>Two hundred historical reconciliations hand-labelled by finance analysts across twelve months of production data. Weighted toward the tail: 40% straightforward, 40% amber-tier variances, 20% red-tier disputes. Each item carries ground-truth tier, variance category and a short human rationale.</p><div class="metrics"><div class="metric"><b>200</b><span>labelled cases</span></div><div class="metric"><b>96%</b><span>variance-detection recall</span></div><div class="metric"><b>22%</b><span>human-touch rate · target 15%</span></div></div></div>
+    <div class="panel reveal"><h3>How a change reaches production</h3><ul class="funnel">
+      <li><div><b>Unit tests</b>Deterministic checks on parsers, coercers, schema repairs, MCP contracts. Blocks the merge on any red.</div></li>
+      <li><div><b>Golden-set regression</b>Runs overnight against all 200 items. Alarms when any per-agent metric drops more than 2 points week-on-week.</div></li>
+      <li><div><b>Canary slot</b>5% of production traffic for 24 hours, metrics paired against baseline.</div></li>
+      <li><div><b>Human review sample</b>A rolling 10% of production runs is human-reviewed; corrections feed the golden set monthly.</div></li>
+      <li><div><b>Ramp</b>5% → 25% → 50% → 100% over four hours, automatic rollback on any regression beyond the change budget.</div></li>
+    </ul></div>
+  </div>
+  <div class="grid6 reveal" style="margin-top:24px">
+    <div class="pm"><div class="k">Parser</div><div class="v">F1 0.94</div><small>line extraction</small></div>
+    <div class="pm"><div class="k">Matcher</div><div class="v">P@1 0.91</div><small>recall@3 0.98</small></div>
+    <div class="pm"><div class="k">Anomaly</div><div class="v">FP 3.1%</div><small>at 95% recall</small></div>
+    <div class="pm"><div class="k">Reconciler</div><div class="v">Brier 0.06</div><small>ECE 0.02</small></div>
+    <div class="pm"><div class="k">Reporter</div><div class="v">5 × 4</div><small>rubric dimensions × tiers</small></div>
+    <div class="pm"><div class="k">Critic</div><div class="v">TR 0.88</div><small>false-reject 0.04</small></div>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Production hardening</span><h2>Hardened for the tail, not the demo.</h2></div><p class="side">The unhappy paths decide whether a system is trusted with money. This is the checklist walked before every release.</p></div>
+  <div class="grid4">
+    <div class="panel reveal"><h3>Reliability</h3><ul class="checks"><li>Circuit breakers on every external tool call</li><li>Retries with exponential backoff and shared jitter</li><li>Idempotency keys on every mutating call</li><li>Timeouts at every layer, decreasing client → tool</li><li>Two-provider LLM strategy with automatic fallback</li><li>Model version pinned per run</li></ul></div>
+    <div class="panel reveal"><h3>Security &amp; identity</h3><ul class="checks"><li>Managed Identity everywhere; zero long-lived secrets</li><li>Conditional Access; MFA for mutating actions</li><li>Content Safety on every prompt and response</li><li>PII redaction at ingress</li><li>Least-privilege MCP tokens</li><li>Prompt-injection defence: untrusted text is data</li></ul></div>
+    <div class="panel reveal"><h3>Cost &amp; governance</h3><ul class="checks"><li>Per-user daily cost caps</li><li>Per-run budget accounting per agent, per model</li><li>Prompt versioning in an immutable store</li><li>Content approval gates above threshold</li><li>Data residency in the customer's region</li><li>Retention: 7 years financial, 90 days run bundles</li></ul></div>
+    <div class="panel reveal"><h3>Deployment &amp; DR</h3><ul class="checks"><li>Bicep infrastructure as code; dev → prod parity</li><li>Blue/green slots; ramped release with auto-rollback</li><li>Cross-region replication; MCP servers active-active</li><li>RTO 4 h · RPO 15 min; failover exercised quarterly</li><li>Nightly restore tests against a scratch environment</li></ul></div>
+  </div>
+</div></section>
+
+<section class="dark"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Where it stands</span><h2>Programme delivery at 75%. The audit-blocking spine is complete.</h2></div><p class="side">Remaining: meter-market certification, CapEx ledger routing, supplier-portal handoff, reporter polish, DR drill and a third-party penetration review.</p></div>
+  <div class="grid4 reveal">
+    <div class="tile"><span>Parser · Matcher · Reconciler · Critic</span><span class="st done">Done</span></div>
+    <div class="tile"><span>Copilot front door · evaluation harness · observability</span><span class="st done">Done</span></div>
+    <div class="tile"><span>Anomaly Detector ML classifier</span><span class="st build">80% · build</span></div>
+    <div class="tile"><span>Reporter · Adaptive Cards</span><span class="st build">60% · build</span></div>
+    <div class="tile"><span>meter-mcp market feed</span><span class="st build">70% · build</span></div>
+    <div class="tile"><span>ledger-mcp CapEx routing</span><span class="st build">40% · build</span></div>
+    <div class="tile"><span>dispute-mcp supplier handoff</span><span class="st build">50% · build</span></div>
+    <div class="tile"><span>DR drill · load test · pen review</span><span class="st plan">Planned</span></div>
+  </div>
+  <div class="cta-row reveal"><h2>Want the same rigour on your workflow?</h2><div class="ctas" style="margin:0"><a class="btn btn-primary" href="mailto:bonda.career@gmail.com">Let's talk</a><a class="btn btn-outline" href="compass.html">Next: Compass →</a></div></div>
+</div></section>
+<footer><div class="wrap"><span>© 2026 Satya Bonda</span><span><a href="index.html">Home</a><a href="https://github.com/git-bonda108" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/bondagenai/" target="_blank" rel="noopener">LinkedIn</a></span></div></footer>
+<script src="script.js"></script></body></html>
