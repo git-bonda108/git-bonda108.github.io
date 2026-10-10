@@ -3,11 +3,23 @@
 <meta name="description" content="A read-only Dynamics 365 F&amp;O agent that gives cited, company-scoped answers in Teams, the web and MCP packs, tested against production every night by an 88-case battery and an LLM judge.">
 </head><body>
 <nav class="nav"><div class="wrap"><a class="brand" href="index.html"><b>Satya Bonda</b><small>← all work</small></a><div class="links"><a href="flick.html">Flick</a><a href="compass.html">Compass</a><a href="quote-intelligence.html">Quote Intelligence</a><a href="dragonfruit.html">Dragonfruit</a><a href="index.html#contact">Contact</a></div><div class="actions"><a class="btn btn-outline" href="assets/Satya_Bonda_Principal_AI_Engineer_Resume.pdf" target="_blank" rel="noopener">Résumé PDF</a><a class="btn btn-primary" href="mailto:bonda.career@gmail.com">Let's talk</a></div><button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
-<header class="hero cs-hero"><div class="wrap" style="display:block">
+<header class="hero cs-hero"><div class="wrap cs-grid">
+  <div>
   <span class="label">Case study · client delivery · Jun – Oct 2026 · v3.7.0 live</span>
   <h1>Compass: one assistant across live Dynamics 365 and the business's own know-how</h1>
   <p class="lead">Staff ask in plain English and get sourced, company-scoped answers with a stated confidence: orders, stock, customers, store context, and the how-to behind them. It runs in Teams, a web console, five MCP tool packs and the shared D365 Agent Factory landing zone. One engine behind every door.</p>
   <div class="metrics"><div class="metric"><b>88</b><span>release battery · green nightly</span></div><div class="metric"><b>95%</b><span>judge agreement with human review</span></div><div class="metric"><b>3,738</b><span>answers with an evidence trace</span></div><div class="metric"><b>v1 → v3.7</b><span>14 releases in 14 weeks</span></div></div>
+  </div>
+  <aside class="eval" aria-label="Nightly evaluation run">
+    <div class="top"><b><i></i>canary · compass v3.7.0</b><span class="badge">GREEN · PASSED</span></div>
+    <div class="row"><span>functional checks</span><b>88 / 88<s>✓</s></b></div>
+    <div class="row"><span>LLM judge vs human review</span><b>95% agreement<s>✓</s></b></div>
+    <div class="row"><span>attack attempts refused</span><b>12 / 12 refused<s>✓</s></b></div>
+    <div class="row"><span>answers with an evidence trail</span><b>3,738</b></div>
+    <div class="row"><span>typical answer time (p95)</span><b>2.1 s</b></div>
+    <div class="row"><span>failing nights, self-reported</span><b>2 · both fixed</b></div>
+    <div class="foot">Runs against production at 03:00 AEST. A failing night files its own diagnosed GitHub issue.</div>
+  </aside>
   <div class="facts"><div><b>My role</b><p>Principal AI Engineer. Architecture, the planner and tool layer, access policy, the evaluation harness, CI and nightly canary, and the landing-zone integration reviewed and merged by the platform owner.</p></div><div><b>Stack</b><p>FastAPI on Azure App Service · GPT-4.1 / 4.1-mini and text-embedding-3-large on Azure AI Foundry · Dynamics 365 F&amp;O OData (39 entities, read-only) · Azure AI Search / Foundry IQ · Table + Blob storage · Entra ID · Application Insights · GitHub Actions</p></div><div><b>Governance</b><p>Microsoft Zero Trust principles, OWASP LLM &amp; Agentic Top 10 assessment, six ADRs, SBOM and secret scanning on every commit, one-command rollback.</p></div></div>
 </div></header>
 
