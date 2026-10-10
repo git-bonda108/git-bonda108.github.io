@@ -362,3 +362,6 @@ html.js .reveal.in{opacity:1;transform:none}
 .dark .flow-dots i{background:rgba(255,255,255,.2)}.dark .flow-dots i.done{background:#A78BFA}.dark .flow-dots i.on{background:#E9D5FF}
 .flow-note{font-size:13px;color:var(--ink-3);padding:0 18px 14px}
 @media (max-width:720px){.flow-head{padding:12px 14px}.flow-cap{padding:14px}.flow-ctl button{padding:6px 11px;font-size:12.5px}}
+
+.demo-note{font-size:13px;color:var(--ink-3);margin-top:-6px}
+.demo-note::before{content:"→ ";color:var(--teal)}
