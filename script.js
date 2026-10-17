@@ -40,3 +40,10 @@ setTimeout(() => document.querySelectorAll('.reveal:not(.in)').forEach(el => el.
     go(-1);
   });
 })();
+
+// project filter (17 Oct 2026)
+document.querySelectorAll('.pfilter button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.pfilter button').forEach(x=>x.classList.toggle('on',x===b));
+  const f=b.dataset.f;
+  document.querySelectorAll('.ptile').forEach(t=>t.classList.toggle('hide',f!=='all'&&t.dataset.g!==f));
+}));
