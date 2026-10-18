@@ -9,14 +9,18 @@ document.querySelectorAll('.links a').forEach(a => a.addEventListener('click', (
 setTimeout(() => document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in')), 1800);
 
 // Flow player: a declarative step-through for architecture walkthroughs. Steps live in a JSON <script> inside each .flow.
+// 18 Oct 2026: auto-plays once when 40% of the player is on screen, pauses when it scrolls away and resumes on return.
+// Any click or key press hands control to the reader. No autoplay under prefers-reduced-motion.
 (function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('.flow').forEach(flow => {
     const data = JSON.parse(flow.querySelector('.flow-data').textContent);
     const svg = flow.querySelector('svg'), nodes = [...svg.querySelectorAll('.fn')], edges = [...svg.querySelectorAll('.fe')];
     const cap = flow.querySelector('.flow-cap'), cnt = flow.querySelector('[data-count]'), dots = flow.querySelector('.flow-dots');
-    data.forEach((_, i) => { const d = document.createElement('i'); d.addEventListener('click', () => go(i)); dots.appendChild(d); });
-    let idx = -1, timer = null;
+    const playBtn = flow.querySelector('[data-act=play]');
+    edges.forEach(e => { try { e.style.setProperty('--len', Math.ceil(e.getTotalLength())); } catch (_) {} });
+    let idx = -1, timer = null, auto = reduce ? 'off' : 'idle'; // idle → playing ⇄ paused → done | off (reader took over)
+    data.forEach((_, i) => { const d = document.createElement('i'); d.addEventListener('click', () => { take(); go(i); }); dots.appendChild(d); });
     function go(i){
       idx = Math.max(-1, Math.min(i, data.length - 1));
       const seen = new Set(), seenE = new Set();
@@ -27,17 +31,30 @@ setTimeout(() => document.querySelectorAll('.reveal:not(.in)').forEach(el => el.
       [...dots.children].forEach((d, k) => { d.classList.toggle('done', k < idx); d.classList.toggle('on', k === idx); });
       if (idx >= 0) { cap.querySelector('[data-idx]').textContent = String(idx + 1).padStart(2, '0'); cap.querySelector('[data-title]').textContent = cur.t; cap.querySelector('[data-text]').textContent = cur.x; }
       else { cap.querySelector('[data-idx]').textContent = '—'; cap.querySelector('[data-title]').textContent = flow.dataset.intro || 'Press Play'; cap.querySelector('[data-text]').textContent = flow.dataset.introText || 'Step through the system the way I would explain it on a whiteboard.'; }
+      cap.classList.remove('tick'); void cap.offsetWidth; cap.classList.add('tick');
       cnt.textContent = (idx + 1) + ' / ' + data.length;
-      if (idx === data.length - 1) stop();
+      if (idx === data.length - 1) { stop(); if (auto === 'playing') auto = 'done'; }
     }
-    function stop(){ if (timer) { clearInterval(timer); timer = null; } flow.querySelector('[data-act=play]').textContent = '▶ Play'; }
-    function play(){ if (timer) return stop(); if (idx >= data.length - 1) go(-1); go(idx + 1); flow.querySelector('[data-act=play]').textContent = '❚❚ Pause'; timer = setInterval(() => go(idx + 1), reduce ? 2600 : 2000); }
-    flow.querySelector('[data-act=play]').addEventListener('click', play);
-    flow.querySelector('[data-act=step]').addEventListener('click', () => { stop(); go(idx + 1 > data.length - 1 ? 0 : idx + 1); });
-    flow.querySelector('[data-act=reset]').addEventListener('click', () => { stop(); go(-1); });
+    function stop(){ if (timer) { clearInterval(timer); timer = null; } playBtn.textContent = '▶ Play'; }
+    function start(){ if (idx >= data.length - 1) go(-1); go(idx + 1); if (idx < data.length - 1) { playBtn.textContent = '❚❚ Pause'; timer = setInterval(() => go(idx + 1), reduce ? 2600 : 3500); } }
+    function take(){ auto = 'off'; }
+    playBtn.addEventListener('click', () => { take(); if (timer) stop(); else start(); });
+    flow.querySelector('[data-act=step]').addEventListener('click', () => { take(); stop(); go(idx + 1 > data.length - 1 ? 0 : idx + 1); });
+    flow.querySelector('[data-act=reset]').addEventListener('click', () => { take(); stop(); go(-1); });
     flow.tabIndex = 0;
-    flow.addEventListener('keydown', ev => { if (ev.key === 'ArrowRight') { stop(); go(idx + 1); ev.preventDefault(); } if (ev.key === 'ArrowLeft') { stop(); go(idx - 1); ev.preventDefault(); } if (ev.key === ' ') { play(); ev.preventDefault(); } });
+    flow.addEventListener('keydown', ev => {
+      if (ev.target.closest('button')) return;
+      if (ev.key === 'ArrowRight') { take(); stop(); go(idx + 1); ev.preventDefault(); }
+      if (ev.key === 'ArrowLeft') { take(); stop(); go(idx - 1); ev.preventDefault(); }
+      if (ev.key === ' ') { take(); if (timer) stop(); else start(); ev.preventDefault(); }
+    });
     go(-1);
+    if (auto === 'idle' && 'IntersectionObserver' in window) {
+      new IntersectionObserver(es => es.forEach(en => {
+        if (en.isIntersecting) { if (auto === 'idle' || auto === 'paused') { auto = 'playing'; start(); } }
+        else if (auto === 'playing' && timer) { stop(); auto = 'paused'; }
+      }), { threshold: 0.4 }).observe(flow);
+    }
   });
 })();
 

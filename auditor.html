@@ -1,0 +1,273 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autonomous Agentic AI Auditor — audit packs drafted from evidence · Case study · Satya Bonda</title>
+<meta name="description" content="Nine AI agents that draft a Microsoft AI specialisation audit pack from a project's own documents, quote them word for word, and turn every evidence gap into a precise client request instead of plausible text.">
+<meta property="og:title" content="Autonomous Agentic AI Auditor · Satya Bonda">
+<meta property="og:description" content="An audit pack drafted from evidence, not from memory: nine agents, verbatim citations checked by code, honest gaps.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=202610182130"></head>
+<body>
+<nav class="nav"><div class="wrap"><a class="brand" href="index.html"><b>Satya Bonda</b><small>← all work</small></a><div class="links"><a href="auditor.html">Auditor</a><a href="flick.html">Flick</a><a href="compass.html">Compass</a><a href="quote-intelligence.html">Quote Intelligence</a><a href="dragonfruit.html">Dragonfruit</a><a href="index.html#contact">Contact</a></div><div class="actions"><a class="btn btn-outline" href="assets/Satya_Bonda_Principal_AI_Engineer_Resume.pdf" target="_blank" rel="noopener">Résumé PDF</a><a class="btn btn-primary" href="mailto:bonda.career@gmail.com">Let's talk</a></div><button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+<header class="hero cs-hero"><div class="wrap" style="display:block">
+  <span class="label">Case study · built for a Microsoft partner · Oct 2026 · core pipeline live, pilot complete</span>
+  <h1>Autonomous Agentic AI Auditor: an audit pack drafted from evidence, not from memory</h1>
+  <p class="lead">Microsoft partners pursuing the AI Platform on Azure specialisation must prove, project by project, that each AI engagement followed a disciplined lifecycle. The proof is a pack of Word templates, written by hand from documents scattered across the project. I built a chain of nine AI agents that drafts the pack from the project's own documents, quotes them word for word, and turns every gap into a precise request to the client instead of filling it with plausible text.</p>
+  <div class="facts"><div><b>My role</b><p>Principal AI Engineer. I designed and built the system: the nine-agent chain and its plain-code supervisor, the grounding guardrails, the evaluation harness, the reviewer workspace and the production hardening.</p></div><div><b>Stack</b><p>Python · pydantic v2 · Claude Sonnet 4.6 (drafting, critique) · Claude Haiku 4.5 (template enrichment) · GPT-4o-mini (failover) · text-embedding-3-large · ChromaDB · Model Context Protocol · python-docx · Streamlit</p></div><div><b>Where it stands</b><p>Core pipeline live. First real engagement complete: an Australian public-sector agency's AI assistant on Azure AI Foundry. Grounded checks over MCP and approval gates are next.</p></div></div>
+</div></header>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">In one minute</span><h2>Upload the documents, press run, review what comes back.</h2></div></div>
+  <div class="minute reveal">
+    <div class="say">
+      <p>The delivery team uploads a project's documents and presses run. A few hours later every required audit template is filled in. Each claim quotes the project's own words with the page and paragraph it came from, and every topic the documents do not cover comes back as a ready-to-send email to the client.</p>
+      <p>The hard part is not the writing. Any language model writes fluently. The hard part is writing only what the evidence supports and saying plainly where it runs out. So the AI reads and drafts, separate agents and plain code check every line, and people decide what ships.</p>
+    </div>
+    <ul class="keys">
+      <li><b>Grounded</b>Drafts may use only the customer's own documents. Every quotation is checked, letter for letter, against its source before it reaches the page.</li>
+      <li><b>Honest</b>When evidence is missing the system says so and drafts the client request. It never pads a section to make it look complete.</li>
+      <li><b>Reviewable</b>A review queue, a readiness view by control and a section-by-section map show what is done, what needs judgement and what is waiting on the client.</li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">The problem</span><h2>The evidence exists. It is just everywhere.</h2></div><p class="side">An AI specialisation audit asks for structured proof across the whole delivery lifecycle. The proof sits in the project's own documents, in its own words.</p></div>
+  <div class="tbl-wrap reveal"><table class="tbl">
+    <thead><tr><th>Phase</th><th>Controls</th><th>What the auditor needs to see</th></tr></thead>
+    <tbody>
+      <tr><td>Assess</td><td class="nw">C1.1</td><td>Is AI the right tool? Business case, data needs, security requirements, solution justification, customer sign-off.</td></tr>
+      <tr><td>Design</td><td class="nw">C2.1 · C2.2 · C2.3</td><td>Solution design, Well-Architected Review, proof of concept. Responsible AI acknowledgement and impact assessment are mandatory.</td></tr>
+      <tr><td>Build</td><td class="nw">C3.1</td><td>Signed statement of work through high-level design, low-level design and as-built. Azure AI Foundry must be in the production stack.</td></tr>
+      <tr><td>Run</td><td class="nw">C4.1 · C4.2</td><td>User-acceptance sign-off, operational Well-Architected Review, standard operating procedures, customer acceptance.</td></tr>
+    </tbody></table></div>
+  <div class="why" style="margin-top:24px">
+    <div class="panel reveal"><h3>Why the pack is slow to write</h3><ul>
+      <li><b>Volume.</b> Up to 74 templates are tracked and 46 are required, each with several sections, required fields and a word budget.</li>
+      <li><b>Scatter.</b> One section can depend on a sentence in the statement of work, a table in the requirements and a line in a meeting transcript.</li>
+      <li><b>Exactness.</b> Auditors look for the project's own words, dates and names. A paraphrase that drifts from the source weakens the case.</li>
+      <li><b>Recency.</b> Evidence must fall inside a 12-month window of the audit date. A stale document quietly invalidates a control.</li>
+      <li><b>Hard gates.</b> Responsible AI artefacts and proof that Azure AI Foundry is in production cannot be waived.</li>
+    </ul></div>
+    <div class="panel alt reveal"><h3>Why generic AI makes it worse</h3><ul>
+      <li>Ask a model to “fill in the business case” and it writes fluent, plausible text. That is exactly the risk.</li>
+      <li>Plausible content the project never stated is worse than a blank section: it misleads the reviewer and fails under audit.</li>
+      <li>What the job needs is a system that retrieves before it writes, cites what it retrieved, has its work checked by a second agent, and sends anything unsupported to a person or to the client.</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">How it works</span><h2>Nine steps from an empty project to a reviewed pack.</h2></div><p class="side">The operator does three things: set up the project, add the documents, press run. Everything between is the system's job, narrated live as it happens.</p></div>
+  <div class="grid3">
+    <div class="step reveal"><div class="h"><i>01</i><b>Set up the project</b></div><p>Name the customer, project, sector, platform and audit date. The workspace creates five folders that mirror a standard project site.</p></div>
+    <div class="step reveal"><div class="h"><i>02</i><b>Add the documents</b></div><p>Statements of work, designs, decks, spreadsheets, meeting transcripts and sign-offs, in Word, PDF, Excel, PowerPoint, VTT or text.</p></div>
+    <div class="step reveal"><div class="h"><i>03</i><b>Read and index</b></div><p>Every document is split into citable pieces with page, paragraph and heading kept, and indexed for this project only.</p></div>
+    <div class="step reveal"><div class="h"><i>04</i><b>Learn the templates</b></div><p>Each Microsoft template is mapped once: sections, tables, styles, word budgets and what the auditor will look for.</p></div>
+    <div class="step reveal"><div class="h"><i>05</i><b>Plan the run</b></div><p>The Manager reads the checklist, picks templates by priority, orders them by control and sets the budget.</p></div>
+    <div class="step reveal"><div class="h"><i>06</i><b>Draft, challenge, verify</b></div><p>For every section: retrieve evidence, draft with quotes, tighten, challenge, then pass a code check of every quotation.</p></div>
+    <div class="step reveal"><div class="h"><i>07</i><b>Write into the template</b></div><p>Text goes into the original Word file with its styling intact. Anything not final carries a visible marker and its reason.</p></div>
+    <div class="step reveal"><div class="h"><i>08</i><b>Assemble and learn</b></div><p>Mappings, coverage, client emails, cost breakdown and chain of custody are zipped. Approved work feeds a practice library.</p></div>
+    <div class="step reveal"><div class="h"><i>09</i><b>Review and send</b></div><p>Reviewers work the queue, check readiness, download the pack and send the client requests. A re-run picks up new evidence.</p></div>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Architecture</span><h2>Six layers, each with one job.</h2></div><p class="side">Models sit inside a gateway, agents inside an orchestrator, and the orchestrator behind a workspace any auditor can use. Control flow, budget and failure handling never depend on a model's judgement.</p></div>
+  <div class="stack-l reveal">
+    <div class="lrow"><b class="v">Workspace</b><div class="chips"><span>Project workspace · set up, upload, run</span><span>Review queue · flagged sections</span><span>Audit health · readiness by control</span><span>Outputs and knowledge base</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b>Orchestration</b><div class="chips"><span>Manager · plain-code supervisor on a background worker</span><span>plan → dispatch → isolate failures → package → learn</span><span>every action streamed live and logged</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b>Agent chain</b><div class="chips"><span>Parser</span><span>RAG Indexer</span><span>Schema Understanding</span><span>Synthesis</span><span>Wordsmith</span><span>Critic</span><span>Validation (code)</span><span>Style</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="g">Knowledge &amp; state</b><div class="chips"><span>Project corpus index · one per project</span><span>Practice library · four learning collections</span><span>Template schema cache</span><span>Audit knowledge base · checklist, tracker, glossary</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="a">Model &amp; tool layer</b><div class="chips"><span>Model gateway · typed output, repair, failover, cost meter</span><span>MCP client registry · HTTP and stdio, tools bound by category</span></div></div><div class="arrow-l">↓</div>
+    <div class="lrow"><b class="g">Outputs</b><div class="chips"><span>Populated Word templates</span><span>Per-template and master mapping</span><span>Coverage matrix</span><span>Client request emails</span><span>Cost breakdown</span><span>SHA-256 chain of custody</span><span>Submission ZIP</span></div></div>
+  </div>
+  <div class="grid3" style="margin-top:24px">
+    <div class="panel reveal"><h3>Code decides, models write</h3><p>The orchestrator is ordinary, testable code. The same inputs produce the same plan, and a run never stalls on an agent's indecision. Models are used only inside agents, through one gateway.</p></div>
+    <div class="panel reveal"><h3>Typed handoffs</h3><p>Every agent emits a schema-validated object: a drafted section, a polished section, a critique or a validation report. Free-form text never passes from one agent to the next.</p></div>
+    <div class="panel reveal"><h3>One customer, one index</h3><p>Each project has its own index and retrieval is scoped to it, so evidence from one customer cannot appear in another customer's pack.</p></div>
+    <div class="panel reveal"><h3>MCP, stated honestly</h3><p>An MCP client registry and tool bridge are built and tested; agents ask for tool categories, not hard-coded servers. The checks that will use them, such as confirming Azure AI Foundry in the customer's subscription, are on the roadmap. Until then every draft is grounded in the uploaded documents.</p></div>
+    <div class="panel reveal"><h3>Memory that is scoped</h3><p>A practice library keeps approved sections, critic lessons, before-and-after wording pairs and a voice profile per customer. Examples teach structure and tone only; facts must come from the current project.</p></div>
+    <div class="panel reveal"><h3>Runs that survive</h3><p>Every run is a dated folder with its outputs and an append-only event log. It keeps going on a background worker even if the browser is closed.</p></div>
+  </div>
+</div></section>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">The agent chain</span><h2>Nine specialists, and no agent marks its own work.</h2></div><p class="side">The writers (Synthesis, Wordsmith) and the checkers (Critic, Validation) are separate agents with separate instructions. Each agent has one input, one output and one clear limit.</p></div>
+  <!--flow:auditor--><div class="flow reveal" data-intro="Nine agents, one section at a time" data-intro-text="It plays on its own when it scrolls into view. Or press Play, or Step through at your own pace."><div class="flow-head"><b>Follow one section through the nine agents</b><div class="flow-ctl"><button data-act="play">▶ Play</button><button data-act="step">Step →</button><button data-act="reset">Reset</button><span data-count>0 / 10</span></div></div><div class="flow-stage"><svg viewBox="0 0 960 312" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="fa"/></marker></defs><line class="lane" x1="8" y1="22" x2="952" y2="22"/><text class="lane-t" x="12" y="16">prepare · once per run</text><line class="lane" x1="8" y1="122" x2="952" y2="122"/><text class="lane-t" x="12" y="116">per-section loop</text><line class="lane" x1="8" y1="238" x2="952" y2="238"/><text class="lane-t" x="12" y="232">five possible outcomes</text><path class="fe" data-e="parser-idx" d="M190 57.0 L215 57.0" marker-end="url(#fa)"/><path class="fe" data-e="idx-schema" d="M385 57.0 L410 57.0" marker-end="url(#fa)"/><path class="fe" data-e="schema-mgr" d="M630 57.0 L660 57.0" marker-end="url(#fa)"/><path class="fe" data-e="mgr-syn" d="M800.0 80 C800.0 107.0 865.0 107.0 865.0 134" marker-end="url(#fa)"/><path class="fe" data-e="syn-rfi" d="M865.0 180 C865.0 215.0 865.0 215.0 865.0 250" marker-end="url(#fa)"/><path class="fe" data-e="syn-ws" d="M790 157.0 L760 157.0" marker-end="url(#fa)"/><path class="fe" data-e="ws-critic" d="M605 157.0 L575 157.0" marker-end="url(#fa)"/><path class="fe" data-e="critic-rev" d="M497.5 180 C497.5 215.0 682.5 215.0 682.5 250" marker-end="url(#fa)"/><path class="fe" data-e="critic-val" d="M420 157.0 L390 157.0" marker-end="url(#fa)"/><path class="fe" data-e="val-rej" d="M302.5 180 C302.5 215.0 302.5 215.0 302.5 250" marker-end="url(#fa)"/><path class="fe" data-e="val-auto" d="M302.5 180 C302.5 215.0 497.5 215.0 497.5 250" marker-end="url(#fa)"/><path class="fe" data-e="val-style" d="M215 157.0 L185 157.0" marker-end="url(#fa)"/><path class="fe" data-e="style-na" d="M102.5 180 C102.5 215.0 102.5 215.0 102.5 250" marker-end="url(#fa)"/><g class="fn k-agent" data-n="parser"><rect x="20" y="34" width="170" height="46" rx="10"/><text x="105.0" y="54.0" text-anchor="middle">Parser</text><text class="sub" x="105.0" y="70.0" text-anchor="middle">page + paragraph anchors</text></g><g class="fn k-store" data-n="idx"><rect x="215" y="34" width="170" height="46" rx="10"/><text x="300.0" y="54.0" text-anchor="middle">RAG Indexer</text><text class="sub" x="300.0" y="70.0" text-anchor="middle">one index per project</text></g><g class="fn k-agent" data-n="schema"><rect x="410" y="34" width="220" height="46" rx="10"/><text x="520.0" y="54.0" text-anchor="middle">Schema Understanding</text><text class="sub" x="520.0" y="70.0" text-anchor="middle">74 templates · cached</text></g><g class="fn k-agent" data-n="mgr"><rect x="660" y="34" width="280" height="46" rx="10"/><text x="800.0" y="54.0" text-anchor="middle">Manager</text><text class="sub" x="800.0" y="70.0" text-anchor="middle">plain code · plans the run</text></g><g class="fn k-agent" data-n="syn"><rect x="790" y="134" width="150" height="46" rx="10"/><text x="865.0" y="154.0" text-anchor="middle">Synthesis</text><text class="sub" x="865.0" y="170.0" text-anchor="middle">draft + cite</text></g><g class="fn k-agent" data-n="ws"><rect x="605" y="134" width="155" height="46" rx="10"/><text x="682.5" y="154.0" text-anchor="middle">Wordsmith</text><text class="sub" x="682.5" y="170.0" text-anchor="middle">tighten only</text></g><g class="fn k-gate" data-n="critic"><rect x="420" y="134" width="155" height="46" rx="10"/><text x="497.5" y="154.0" text-anchor="middle">Critic</text><text class="sub" x="497.5" y="170.0" text-anchor="middle">default: disagree</text></g><g class="fn k-gate" data-n="val"><rect x="215" y="134" width="175" height="46" rx="10"/><text x="302.5" y="154.0" text-anchor="middle">Validation (code)</text><text class="sub" x="302.5" y="170.0" text-anchor="middle">exact-quote check</text></g><g class="fn k-agent" data-n="style"><rect x="20" y="134" width="165" height="46" rx="10"/><text x="102.5" y="154.0" text-anchor="middle">Style</text><text class="sub" x="102.5" y="170.0" text-anchor="middle">writes the DOCX</text></g><g class="fn k-store" data-n="na"><rect x="20" y="250" width="165" height="46" rx="10"/><text x="102.5" y="270.0" text-anchor="middle">Not applicable</text><text class="sub" x="102.5" y="286.0" text-anchor="middle">preamble · metadata</text></g><g class="fn k-fail" data-n="rej"><rect x="215" y="250" width="175" height="46" rx="10"/><text x="302.5" y="270.0" text-anchor="middle">Rejected</text><text class="sub" x="302.5" y="286.0" text-anchor="middle">kept out · flagged</text></g><g class="fn k-out" data-n="auto"><rect x="420" y="250" width="155" height="46" rx="10"/><text x="497.5" y="270.0" text-anchor="middle">Auto-approved</text><text class="sub" x="497.5" y="286.0" text-anchor="middle">score ≥ 0.85</text></g><g class="fn k-amber" data-n="rev"><rect x="605" y="250" width="155" height="46" rx="10"/><text x="682.5" y="270.0" text-anchor="middle">For review</text><text class="sub" x="682.5" y="286.0" text-anchor="middle">objection attached</text></g><g class="fn k-gate" data-n="rfi"><rect x="790" y="250" width="150" height="46" rx="10"/><text x="865.0" y="270.0" text-anchor="middle">Client RFI</text><text class="sub" x="865.0" y="286.0" text-anchor="middle">email drafted</text></g></svg></div><div class="flow-cap"><i data-idx>—</i><div><b data-title></b><p data-text></p></div></div><div class="flow-dots"></div><script type="application/json" class="flow-data">[{"t": "Read every document", "x": "The Parser reads Word, PDF, Excel, PowerPoint, transcripts and text, keeping page, paragraph and heading anchors. The RAG Indexer turns the pieces into a searchable index that belongs to this project only.", "n": ["parser", "idx"], "e": ["parser-idx"]}, {"t": "Learn what each template asks for", "x": "Schema Understanding maps every Microsoft template once: its sections, tables, styles, word budgets and what the auditor will look for. The result is cached, so every run reasons against the same definition.", "n": ["schema"], "e": ["idx-schema"]}, {"t": "Plan the run in plain code", "x": "The Manager is ordinary code, not a model. It picks templates by priority, orders them by control, sets the budget and dispatches each section through the chain. A failed template is recorded and the run moves on.", "n": ["mgr"], "e": ["schema-mgr"]}, {"t": "Draft only from evidence", "x": "Synthesis retrieves the top eight chunks for a section and drafts in the shape the template expects, quoting the project word for word. It may not use general knowledge.", "n": ["syn"], "e": ["mgr-syn"]}, {"t": "No evidence? Ask the client", "x": "If the retrieved chunks do not support the section, the writer must say “not grounded”. The section becomes a client request with a ready-to-send email naming the evidence needed.", "n": ["rfi"], "e": ["syn-rfi"]}, {"t": "Tighten the wording", "x": "The Wordsmith cuts padding, hedging and marketing language. It cannot add or remove a fact or a citation, and it keeps every quotation exactly as written.", "n": ["ws"], "e": ["syn-ws"]}, {"t": "A second agent argues", "x": "The Critic has separate instructions and starts from disagreement: unsupported claims, misquotes, inference dressed as fact, missing fields, personal data. An objection sends the section to review with the reason attached.", "n": ["critic", "rev"], "e": ["ws-critic", "critic-rev"]}, {"t": "Code checks every quotation", "x": "Validation is plain code. Every quotation must appear, letter for letter, in the chunk it cites. A fabricated citation is a hard stop: the section is rejected and kept out of the document.", "n": ["val", "rej"], "e": ["critic-val", "val-rej"]}, {"t": "Only clean sections auto-approve", "x": "Four signals are multiplied into one score: the writer’s confidence, retrieval grounding, the share of quotes that passed, and critic agreement. Only a section that clears every gate with 0.85 or more is written as final.", "n": ["auto"], "e": ["val-auto"]}, {"t": "Write it all back, honestly marked", "x": "Style writes every outcome into the original Word template with its styling intact. Approved text is final; everything else carries a visible marker and its reason. Preamble and metadata are filled from project details.", "n": ["style", "na"], "e": ["val-style", "style-na"]}]</script></div><!--/flow:auditor-->
+  <div class="stack2">
+    <div class="tbl-wrap reveal"><table class="tbl">
+      <thead><tr><th>Agent</th><th>Its job</th><th>Its limit</th></tr></thead>
+      <tbody>
+        <tr><td>Parser</td><td>Reads every document, keeping anchors for citation</td><td>Never interprets; reports files it cannot read</td></tr>
+        <tr><td>RAG Indexer</td><td>Makes the corpus searchable, tagged by document, page and paragraph</td><td>No cross-customer retrieval</td></tr>
+        <tr><td>Schema Understanding</td><td>Learns each template and what each section is for</td><td>Describes; never writes content</td></tr>
+        <tr><td>Manager</td><td>Plans, dispatches, enforces the budget, packages the run</td><td>A failed template is recorded; the run continues</td></tr>
+        <tr><td>Synthesis</td><td>Drafts from the top eight retrieved chunks and approved examples</td><td>Project documents only; no evidence means a client request</td></tr>
+        <tr><td>Wordsmith</td><td>Cuts padding and marketing language; applies house style</td><td>Cannot add or remove facts or citations</td></tr>
+        <tr><td>Critic</td><td>Hunts unsupported claims, misquotes and personal data</td><td>Can object and route; never rewrites</td></tr>
+        <tr><td>Validation</td><td>Plain code: quotes, citation density, word budget, banned phrases</td><td>Hard stop for a fabricated citation</td></tr>
+        <tr><td>Style</td><td>Writes into the original Word file, styling intact</td><td>Anything not final carries a visible marker</td></tr>
+      </tbody></table></div>
+    <div class="tbl-wrap reveal"><table class="tbl">
+      <thead><tr><th>Outcome</th><th>What it means</th><th>What happens next</th></tr></thead>
+      <tbody>
+        <tr><td><span class="chip g">Auto-approved</span></td><td>Cleared every gate with a score of 0.85 or more</td><td>Written as final text</td></tr>
+        <tr><td><span class="chip a">For review</span></td><td>A grounded draft exists, but the critic or validator raised a specific concern</td><td>A reviewer accepts or edits, with the concern shown beside the draft</td></tr>
+        <tr><td><span class="chip meter">Client RFI</span></td><td>The documents hold no evidence for this section</td><td>A draft email to the customer naming the evidence needed</td></tr>
+        <tr><td><span class="chip r">Rejected</span></td><td>A quotation could not be found in its source</td><td>Kept out of the document and flagged</td></tr>
+        <tr><td><span class="chip next">Not applicable</span></td><td>Preamble or metadata</td><td>Filled automatically from project details</td></tr>
+      </tbody></table>
+      <p class="tbl-note" style="padding:0 16px 14px">The contract between agents: no agent may state a fact it cannot back with a quotation retrieved in this run, and no agent may change another agent's citations.</p></div>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Guardrails</span><h2>Fluency is cheap. Defensibility is the product.</h2></div><p class="side">These controls run on every section of every run, inside the production pipeline, not in a separate test environment.</p></div>
+  <div class="gg">
+    <div class="g reveal"><i>01 · Evidence only</i><b>Closed-book drafting</b><p>The writer sees only chunks retrieved from this project and may not use general knowledge. If the chunks fall short it must return “not grounded”, with a reason.</p></div>
+    <div class="g reveal"><i>02 · Verbatim citation</i><b>Quotes checked letter for letter</b><p>Each citation quotes eight or more consecutive words, an exact substring of its chunk, with no brackets or ellipses. Only whitespace and punctuation may drift.</p></div>
+    <div class="g reveal"><i>03 · Two-agent verification</i><b>The writer never grades itself</b><p>A separate critic reviews every polished section. If the writer has failed over to the second provider, the critic stays on the primary, so a different model family checks the draft.</p></div>
+    <div class="g reveal"><i>04 · Honest gaps</i><b>Missing evidence becomes a request</b><p>An ungrounded section is never padded. It becomes a client request with a drafted email, and a visible marker in the document.</p></div>
+    <div class="g reveal"><i>05 · Typed outputs</i><b>Fit the schema, or be refused</b><p>Every model response must fit a typed schema. Common formatting slips are repaired in code; anything still malformed is refused, never guessed at.</p></div>
+    <div class="g reveal"><i>06 · Voice gate</i><b>No marketing, no inference verbs</b><p>A banned-phrase list blocks marketing language, exclamation marks and US spellings. The critic flags “this demonstrates” claims a chunk does not support.</p></div>
+  </div>
+  <div class="two" style="margin-top:24px">
+    <div class="panel reveal"><h3>How a section earns auto-approval</h3><p>Four signals are multiplied: how confident the writer says it is, how well retrieval grounded the draft, the share of quotations that passed the code check, and whether the critic agreed (1.0 when it approves, 0.5 when it objects). Because they are multiplied, one weak signal pulls the whole score down. A section cannot reach auto-approval on fluency alone.</p><div class="formula"><b>score</b> = confidence × grounding × citation match rate × critic agreement</div></div>
+    <div class="tbl-wrap reveal"><table class="tbl">
+      <thead><tr><th>Score</th><th>Outcome</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td class="n">0.85 or more</td><td><span class="chip g">Auto-approved</span></td><td>Written as final; score kept in the audit trail</td></tr>
+        <tr><td class="n">0.50 – 0.85</td><td><span class="chip a">For review</span></td><td>Human review queue, with the reason</td></tr>
+        <tr><td class="n">below 0.50</td><td><span class="chip r">Rejected</span></td><td>Kept out of the document; flagged</td></tr>
+      </tbody></table>
+      <p class="tbl-note" style="padding:0 16px 14px">An unresolved critic objection or validation issue sends a section to review whatever its score.</p></div>
+  </div>
+</div></section>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Human in the loop</span><h2>People review, decide and send. The system prepares.</h2></div><p class="side">The workspace is built for an audit reviewer, not an engineer. Each screen answers one question in the reviewer's own terms.</p></div>
+  <div class="grid4">
+    <div class="panel reveal"><h3>Project workspace</h3><p><i>“What do I upload, and is it running?”</i> Four numbered steps. During a run a live agent log narrates every action and finished templates appear as they complete.</p></div>
+    <div class="panel reveal"><h3>Review queue</h3><p><i>“What needs my judgement?”</i> Every flagged section, filterable by control, status, template or keyword, with the critic's or validator's specific reason.</p></div>
+    <div class="panel reveal"><h3>Audit health</h3><p><i>“How ready are we?”</i> Readiness overall and by control. Templates with the longest review queues come first, so effort goes where it moves readiness most.</p></div>
+    <div class="panel reveal"><h3>Outputs</h3><p><i>“Where is the pack?”</i> Download the submission ZIP, the master mapping or the client emails, and browse earlier runs.</p></div>
+  </div>
+  <div class="two" style="margin-top:24px">
+    <div class="panel reveal"><h3>Readiness, in words</h3><p>Count every auto-approved section as done and every section in review as half done, because it has a grounded draft that only needs confirming. A client request counts as nothing until the evidence arrives. Divide by the sections in scope, leaving out preamble and metadata.</p><div class="formula"><b>readiness</b> = (auto-approved + ½ × for review) ÷ sections in scope</div>
+      <div class="bands"><div><b>80%+</b>submission-ready</div><div><b>60–80%</b>finish the review queue</div><div><b>40–60%</b>send the client requests now</div><div><b>below 40%</b>hold a gap review meeting</div></div></div>
+    <div class="panel reveal"><h3>The same truth in the document</h3><p>Each populated Word file opens with a banner naming the project, customer, audit date and run. A section that is not final carries a short marker with its outcome and reason, for example that no retrieved evidence describes the business problem.</p><p>Each evidence gap becomes one email naming the template, the section, why the documents did not support it and what the customer should send. The delivery team reviews and sends. The system never contacts a customer on its own.</p></div>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Production hardening &amp; cost</span><h2>Built for the unhappy paths of a four-hour unattended run.</h2></div><p class="side">Slow providers, malformed responses and exhausted credits were each observed in real runs, and each one is handled.</p></div>
+  <div class="grid4 hard">
+    <div class="panel reveal"><h3>Reliability</h3><ul class="checks"><li><b>Failover.</b> Drafting and polishing fail over to a second provider only on hard blocks such as exhausted credit, revoked authentication or quota; each failover is tagged in telemetry</li><li><b>Failure isolation.</b> A template that fails is recorded with its error and the run moves on; one bad document never sinks the pack</li><li><b>Schema repair before refusal.</b> Recurring response-shape slips are corrected in code and pinned by tests</li><li>Retries with back-off on rate limits; a heartbeat during long model calls</li></ul></div>
+    <div class="panel reveal"><h3>Data isolation &amp; safety</h3><ul class="checks"><li>One index per project; retrieval physically scoped to the engagement</li><li>Document text enters the model as content to analyse, never as instructions, which limits prompt injection from uploaded files</li><li>Drafts refer to roles, not individuals; the critic flags names, emails and phone numbers</li><li>Provider keys in environment configuration, never in outputs or logs</li></ul></div>
+    <div class="panel reveal"><h3>Budget cap</h3><ul class="checks"><li>A cost meter tracks spend during the run: at <b>70%</b> of the cap it warns, at <b>90%</b> drafting shifts to the lower-cost provider, and at <b>100%</b> the run stops cleanly, records why and still packages everything completed</li><li>Every call metered: agent, model, input, output and cached tokens, latency, cost, error</li><li>Prompt caching for stable instructions; the strongest model drafts and critiques, a faster one enriches templates</li></ul></div>
+    <div class="panel reveal"><h3>Chain of custody</h3><ul class="checks"><li>Every file in the bundle listed with its SHA-256 fingerprint and size</li><li>A provenance banner on every document: project, customer, audit date, run</li><li>A record per section: status, reason, score, retries, citation and word counts</li><li>Prompts live in version control and change only through reviewed commits</li></ul></div>
+  </div>
+</div></section>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Evaluation harness</span><h2>Each layer has its own metric, target and hard floor.</h2></div><p class="side">So one layer can never hide another's failure. “Every run” means the check executes inside the production pipeline on every section. “Staged” means the test is written and waits on the agent it measures.</p></div>
+  <div class="tbl-wrap reveal"><table class="tbl">
+    <thead><tr><th>Metric</th><th>What it protects</th><th>Target</th><th>Hard gate</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Citation verbatim match</td><td>Every quote is really in its source</td><td class="n">100%</td><td>any miss fails</td><td><span class="chip ok">Every run</span></td></tr>
+      <tr><td>Fabricated citations on the page</td><td>Nothing invented reaches the reviewer</td><td class="n">0</td><td>more than 0 fails</td><td><span class="chip ok">Every run</span></td></tr>
+      <tr><td>Word budget conformance</td><td>Sections fit what the template asks for</td><td class="n">in budget</td><td>±20%</td><td><span class="chip ok">Every run</span></td></tr>
+      <tr><td>Banned phrases in output</td><td>No marketing voice, no unsupported inference</td><td class="n">0</td><td>more than 0 flags</td><td><span class="chip ok">Every run</span></td></tr>
+      <tr><td>Parse success rate</td><td>Documents are read, not silently skipped</td><td class="n">≥ 99.5%</td><td>95%</td><td><span class="chip ok">Unit tested</span></td></tr>
+      <tr><td>Control classification, top-1</td><td>Evidence lands under the right control</td><td class="n">≥ 92%</td><td>80%</td><td><span class="chip stage">Staged</span></td></tr>
+      <tr><td>Verifier-supported rate</td><td>An independent verifier backs each claim</td><td class="n">≥ 95%</td><td>90%</td><td><span class="chip stage">Staged</span></td></tr>
+      <tr><td>End-to-end hallucination rate</td><td>Whole-pack factual accuracy</td><td class="n">≤ 0.5%</td><td>1%</td><td><span class="chip stage">Staged</span></td></tr>
+      <tr><td>Model cost per full pack</td><td>Predictable cost per engagement</td><td class="n">≤ US$5</td><td>US$10</td><td><span class="chip meter">Metered</span></td></tr>
+    </tbody></table></div>
+  <div class="two" style="margin-top:24px">
+    <div class="panel reveal"><h3>The test suite today</h3><p>Fast unit tests with no network pin the failures seen in production: twelve for response-shape repair, ten for which provider errors may and may not trigger failover, nine for how bullets and tables become native Word elements, plus schema, knowledge-base and parser contracts. 58 pass in under five seconds; 14 integration and regression tests are staged for the roadmap agents.</p></div>
+    <div class="panel reveal"><h3>Golden dossiers with planted gaps</h3><p>Two synthetic engagements are release-gate fixtures. One must proceed with exactly four named gaps: an unassigned Responsible AI owner, a stale Well-Architected Review, a verbal-only go-live sign-off and patient names needing redaction. The other must be found ineligible, with seven gaps including the absence of Azure AI Foundry. Both are among the staged tests.</p></div>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Pilot results</span><h2>A real engagement, measured end to end, read honestly.</h2></div><p class="side">The pilot was an Australian public-sector agency's AI assistant for analytical papers, built on Azure AI Foundry. The documents were left exactly as delivered, with no clean-up. It is a baseline, not a showcase.</p></div>
+  <div class="tbl-wrap reveal"><table class="tbl w3">
+    <thead><tr><th>What was measured</th><th>What it means</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Source documents</td><td>The project's own files as delivered: Word, PDF, Excel, PowerPoint, a meeting transcript and others</td><td class="n">17</td></tr>
+      <tr><td>Templates produced</td><td>Every required template across the seven controls, written into the original Microsoft files</td><td class="n">46 of 46</td></tr>
+      <tr><td>Sections in scope</td><td>305 sections were mapped; 45 were preamble or metadata and filled automatically</td><td class="n">260</td></tr>
+      <tr><td>Drafted from evidence</td><td>Sections with a grounded draft citing the project's documents: 1 auto-approved, 121 waiting for review, each with a specific reason</td><td class="n">122 · 47%</td></tr>
+      <tr><td>Became client requests</td><td>Sections the 17 documents could not support. The system said so and drafted the email instead of writing around the gap</td><td class="n">138 · 53%</td></tr>
+      <tr><td>Fabricated citations</td><td>Quotations that reached the page without being found in their source, at the final gate</td><td class="n">0</td></tr>
+      <tr><td>Readiness at baseline</td><td>In the “hold a gap review meeting” band. That is the correct call for this corpus, and the 138 requests are the agenda</td><td class="n">23.7%</td></tr>
+      <tr><td>Unattended run time</td><td>The whole pack with no operator, about 2.9 minutes of processing per template</td><td class="n">4 h 14 min</td></tr>
+      <tr><td>Model cost, full pack</td><td>Inside the US$10 ceiling, above the US$5 target; US$0.21 per template on average, US$0.51 at most</td><td class="n">US$9.91</td></tr>
+      <tr><td>Prompt tokens from cache</td><td>Stable instructions served from the provider's cache instead of re-sent</td><td class="n">~38%</td></tr>
+      <tr><td>Files under chain of custody</td><td>Every file in the bundle, each with a SHA-256 fingerprint</td><td class="n">98</td></tr>
+    </tbody></table></div>
+  <div class="two" style="margin-top:24px">
+    <div class="panel reveal"><h3>Why 53% client requests is the right behaviour</h3><p>Seventeen documents cannot cover a 46-template lifecycle. Much of the evidence simply was not in the corpus, and the system said so instead of writing around it. Coverage followed the documents: Handover had its evidence and reached 87% drafted; the Well-Architected Review reached 22% because the review exports were not supplied, and the client requests point at exactly those exports.</p><p>A pack that admits half its sections are waiting on the customer holds up under audit. One that looks complete and is not unravels at the first question.</p></div>
+    <div class="tbl-wrap reveal"><table class="tbl">
+      <thead><tr><th>Control</th><th>In scope</th><th>Drafted</th><th>Client requests</th></tr></thead>
+      <tbody>
+        <tr><td>C1.1 Assess</td><td class="n">51</td><td class="n">22 · 43%</td><td class="n">29</td></tr>
+        <tr><td>C2.1 Design</td><td class="n">66</td><td class="n">36 · 55%</td><td class="n">30</td></tr>
+        <tr><td>C2.2 Well-Architected</td><td class="n">18</td><td class="n">4 · 22%</td><td class="n">14</td></tr>
+        <tr><td>C2.3 Proof of concept</td><td class="n">31</td><td class="n">12 · 39%</td><td class="n">19</td></tr>
+        <tr><td>C3.1 Build</td><td class="n">51</td><td class="n">18 · 35%</td><td class="n">33</td></tr>
+        <tr><td>C4.1 Validate</td><td class="n">20</td><td class="n">10 · 50%</td><td class="n">10</td></tr>
+        <tr><td>C4.2 Handover</td><td class="n">23</td><td class="n">20 · 87%</td><td class="n">3</td></tr>
+        <tr class="tot"><td>Total</td><td class="n">260</td><td class="n">122 · 47%</td><td class="n">138</td></tr>
+      </tbody></table>
+      <p class="tbl-note" style="padding:0 16px 14px">The responsible-AI impact assessment template failed schema validation in this run, was regenerated afterwards and is not in the section count. That failure is now covered by schema-repair tests.</p></div>
+  </div>
+  <div class="callout reveal"><b>Only one section auto-approved, on purpose.</b> The critic is deliberately strict and objected to most drafts, so 121 sections sit in review with a specific reason each. Tuning the writer–critic contract is the main quality lever for the next engagement. <b>What changed for the analyst:</b> the first-draft pass, reading every document against every section, is done by the machine. Analysts start from a mapped pack: grounded drafts to confirm, specific objections to resolve, and client emails ready to send.</div>
+</div></section>
+
+<section class="light"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Lessons &amp; roadmap</span><h2>What the pilot taught, and what ships next.</h2></div><p class="side">Improvements shipped after the pilot run are listed separately from the pilot results and will be measured on the next engagement.</p></div>
+  <div class="tbl-wrap reveal"><table class="tbl">
+    <thead><tr><th>What we saw</th><th>What we changed</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>First drafts read as essay paragraphs; auditors scan, they do not read prose</td><td>Drafting follows each section's shape: bullets, tables, sign-off blocks, short paragraphs in the project's own vocabulary, rendered as native Word elements</td><td><span class="chip ok">Shipped</span></td></tr>
+      <tr><td>A provider credit exhaustion made the critic fail mid-run</td><td>Cross-provider failover on hard blocks, tagged in telemetry and pinned by tests</td><td><span class="chip ok">Shipped</span></td></tr>
+      <tr><td>Long runs looked stalled to operators</td><td>Background worker, live agent log with a heartbeat, persisted event stream</td><td><span class="chip ok">Shipped</span></td></tr>
+      <tr><td>A response occasionally omitted a field that could be derived</td><td>Schema repair computes it before validation</td><td><span class="chip ok">Shipped</span></td></tr>
+      <tr><td>The critic objected to most drafts, so auto-approval stayed rare</td><td>Tune the writer–critic contract and feed critic lessons back to the writer</td><td><span class="chip next">Next</span></td></tr>
+      <tr><td>A “document purpose” block in some templates stayed as placeholder text</td><td>Treat it as a populatable section</td><td><span class="chip next">Next</span></td></tr>
+    </tbody></table></div>
+  <div class="grid3" style="margin-top:24px">
+    <div class="panel reveal"><h3>Track A · grounded checks over MCP</h3><p>A Responsible AI watchdog grounded in Microsoft Learn, an Azure AI Foundry presence check that queries the customer's subscription through the Azure MCP server, a recency and checklist-version validator, and a Well-Architected specialist. A model's memory of a standard is not accepted as evidence.</p></div>
+    <div class="panel reveal"><h3>Track B · orchestration and gates</h3><p>A graph-based state machine with five named human approval gates: scope, classification, extraction, gap and risk, and pack. A control classifier, a template matcher and an independent adversarial verifier, which activate the staged tests.</p></div>
+    <div class="panel reveal"><h3>Track C · enterprise integration</h3><p>Evidence sync from SharePoint and tracker write-back through Microsoft 365 MCP, client requests sent through the customer's preferred channel with a person approving each send, a personal-data anonymisation agent and OCR for scanned evidence.</p></div>
+  </div>
+</div></section>
+
+<section class="light-2"><div class="wrap">
+  <div class="sec-head reveal"><div><span class="label">Technology stack</span><h2>Standard, inspectable parts, chosen for traceability.</h2></div></div>
+  <div class="tbl-wrap reveal"><table class="tbl">
+    <thead><tr><th>Layer</th><th>Component</th><th>Role in the system</th></tr></thead>
+    <tbody>
+      <tr><td>Workspace</td><td>Streamlit, eight pages</td><td>Project workspace, review queue, audit health, outputs, the agents, knowledge base, template glossary</td></tr>
+      <tr><td>Contracts</td><td>Python · pydantic v2</td><td>Typed, validated objects between every agent</td></tr>
+      <tr><td>Orchestration</td><td>Plain-code Python supervisor on a background worker</td><td>Planning, dispatch, budget, failure isolation, packaging</td></tr>
+      <tr><td>Drafting &amp; critique</td><td>Claude Sonnet 4.6</td><td>Synthesis, Wordsmith and Critic, structured output through forced tool use, prompt caching</td></tr>
+      <tr><td>Template enrichment</td><td>Claude Haiku 4.5</td><td>Infers each section's intent, required fields and audit relevance, once per template</td></tr>
+      <tr><td>Failover</td><td>GPT-4o-mini</td><td>Second provider with JSON-schema structured output; every failover logged</td></tr>
+      <tr><td>Retrieval</td><td>text-embedding-3-large · ChromaDB</td><td>One persistent collection per project, plus four practice-library collections</td></tr>
+      <tr><td>Reading documents</td><td>python-docx · pypdf · PyMuPDF · openpyxl · python-pptx · WebVTT</td><td>Format-aware parsing with page, paragraph and heading anchors</td></tr>
+      <tr><td>Writing documents</td><td>python-docx · lxml</td><td>Style-preserving write-back, native bullets and tables, provenance banner</td></tr>
+      <tr><td>Tool protocol</td><td>Model Context Protocol, official Python SDK</td><td>Client registry over HTTP and stdio, category-bound tool discovery, mock registry for tests</td></tr>
+      <tr><td>Integrity &amp; testing</td><td>SHA-256 manifest · pytest</td><td>Chain of custody across every output file; unit, integration and regression markers</td></tr>
+    </tbody></table></div>
+</div></section>
+
+<section class="dark"><div class="wrap">
+  <div class="cta-row reveal" style="border:0;margin:0;padding:0"><h2>Need AI output that holds up under audit?</h2><div class="ctas" style="margin:0"><a class="btn btn-primary" href="mailto:bonda.career@gmail.com">Let's talk</a><a class="btn btn-outline" href="flick.html">Next: Flick →</a></div></div>
+</div></section>
+<footer><div class="wrap"><span>© 2026 Satya Bonda</span><span><a href="index.html">Home</a><a href="https://github.com/git-bonda108" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/bondagenai/" target="_blank" rel="noopener">LinkedIn</a></span></div></footer>
+<script src="script.js?v=202610182130"></script></body></html>

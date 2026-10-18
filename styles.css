@@ -460,3 +460,105 @@ ul.punch li::before{content:"";position:absolute;left:0;top:.5em;width:9px;heigh
 .proof .grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));row-gap:18px}
 .proof .cell{padding:8px 18px}
 .proof .n{white-space:nowrap;font-size:clamp(26px,2.4vw,38px)}
+
+/* 18 Oct 2026 · story-first case studies: problem → how it works → what changed */
+.flow .fe.on{animation:fdraw .6s ease-out,fdash 1.2s linear .6s infinite}
+@keyframes fdraw{from{stroke-dasharray:var(--len,600) var(--len,600);stroke-dashoffset:var(--len,600)}to{stroke-dasharray:var(--len,600) var(--len,600);stroke-dashoffset:0}}
+.flow .fn{transform-box:fill-box;transform-origin:center}
+.flow .fn.on{animation:fnpop .45s cubic-bezier(.2,.8,.3,1.2)}
+@keyframes fnpop{from{transform:scale(.93)}to{transform:none}}
+.flow-cap.tick>div{animation:capin .4s ease-out}
+@keyframes capin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.flow-dots i{transition:background .3s ease}
+@media (prefers-reduced-motion:reduce){.flow .fe.on,.flow .fn.on,.flow-cap.tick>div{animation:none}}
+
+/* plain-English lead block */
+.minute{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:start}
+.minute .say p{font-family:var(--serif);font-weight:300;font-size:clamp(21px,1.9vw,27px);line-height:1.38;letter-spacing:-.01em;color:var(--ink)}
+.minute .say p+p{margin-top:18px;font-family:var(--sans);font-size:17px;line-height:1.6;color:var(--ink-2);letter-spacing:0}
+.keys{list-style:none;display:flex;flex-direction:column;gap:12px}
+.keys li{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--violet);border-radius:12px;padding:14px 16px;font-size:15px;color:var(--ink-2);line-height:1.5}
+.keys li b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:3px}
+.light-2 .keys li{background:var(--paper)}
+/* bullets for the problem */
+.why{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.why .panel ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.why .panel li{position:relative;padding-left:20px;font-size:15.5px;line-height:1.55}
+.why .panel li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;border-radius:2px;background:var(--violet)}
+.why .panel li b{color:var(--ink);font-weight:600}
+.why .panel.alt li::before{background:var(--amber)}
+.callout{margin-top:24px;border:1px solid var(--line);border-left:4px solid var(--violet);border-radius:14px;background:var(--paper);padding:18px 22px;font-size:16px;color:var(--ink-2);line-height:1.6}
+.callout b{color:var(--ink)}
+/* four ideas */
+.ideas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.idea{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.idea .n{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.idea h3{font-size:22px;line-height:1.2}
+.idea p{font-size:15px;color:var(--ink-2);line-height:1.55}
+/* numbered user steps */
+.olist{list-style:none;counter-reset:o;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.olist li{counter-increment:o;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.olist li::before{content:counter(o,decimal-leading-zero);display:block;font-family:var(--mono);font-size:13px;color:var(--teal);margin-bottom:8px}
+.olist li b{display:block;font-family:var(--serif);font-weight:400;font-size:20px;color:var(--ink);margin-bottom:6px;line-height:1.2}
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);-webkit-overflow-scrolling:touch}
+.tbl{width:100%;border-collapse:collapse;font-size:15px;line-height:1.5}
+.tbl th{text-align:left;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);background:var(--paper-2);padding:12px 16px;white-space:nowrap}
+.tbl td{padding:13px 16px;border-top:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+.tbl td:first-child{color:var(--ink);font-weight:600}
+.tbl td.n{font-family:var(--mono);font-weight:500;color:var(--ink);white-space:nowrap;font-size:15.5px}
+.tbl tr.tot td{background:var(--paper-2);font-weight:600;color:var(--ink)}
+.tbl .chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.chip.ok{background:#D1FAE5;color:#065F46}.chip.stage{background:#FEF3C7;color:#92400E}.chip.next{background:#E5E7EB;color:#374151}.chip.meter{background:#EDE9FE;color:#5B21B6}
+.chip.g{background:#D1FAE5;color:#065F46}.chip.a{background:#FEF3C7;color:#92400E}.chip.r{background:#FEE2E2;color:#991B1B}
+.tbl-note{font-size:14px;color:var(--ink-3);margin-top:12px;max-width:80ch}
+.tbl.w3 td:first-child{width:28%}
+/* formula, explained */
+.formula{font-family:var(--mono);font-size:14px;background:var(--deep);color:#EDE9FE;border-radius:12px;padding:14px 18px;line-height:1.6;overflow-wrap:anywhere}
+.formula b{color:#fff;font-weight:500}
+.bands{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:4px}
+.bands div{border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--ink-2);background:var(--paper)}
+.bands div b{display:block;font-family:var(--mono);font-size:15px;color:var(--ink);font-weight:500;margin-bottom:2px}
+/* guardrail grid */
+.gg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gg .g{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+.gg .g i{font-family:var(--mono);font-style:normal;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.gg .g b{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.2;color:var(--ink)}
+.gg .g p{font-size:14.5px;color:var(--ink-2);line-height:1.55}
+/* the outcomes, told last */
+.changed{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.changed .c{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;grid-template-columns:1fr auto;gap:6px 18px;align-items:end}
+.changed .c p{font-size:15px;color:var(--ink-2);line-height:1.55;grid-column:1}
+.changed .c p b{color:var(--ink)}
+.changed .c .v{grid-column:2;grid-row:1/3;font-family:var(--mono);font-size:30px;font-weight:500;letter-spacing:-.03em;color:var(--ink);white-space:nowrap;text-align:right}
+.changed .c small{grid-column:1;font-size:13px;color:var(--ink-3)}
+.dark .changed .c{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}
+.dark .changed .c p{color:rgba(255,255,255,.82)}.dark .changed .c p b,.dark .changed .c .v{color:#fff}.dark .changed .c small{color:rgba(255,255,255,.6)}
+/* bento: problem → built → outcome */
+dl.pbo{display:grid;grid-template-columns:78px 1fr;gap:9px 14px;margin:2px 0 4px}
+dl.pbo dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);padding-top:4px;font-weight:500}
+dl.pbo dd{font-size:15.5px;line-height:1.5;color:var(--ink-2)}
+dl.pbo dd:last-of-type{color:var(--ink);font-weight:500}
+.card.span2 dl.pbo dd{font-size:16.5px}
+.bento .card.tall{grid-row:span 2}
+.minute>*,.why>*,.ideas>*,.olist>*,.gg>*,.changed>*,.bands>*{min-width:0}
+@media (max-width:1024px){
+  .minute,.why{grid-template-columns:1fr;gap:24px}
+  .ideas,.gg{grid-template-columns:repeat(2,1fr)}
+  .olist{grid-template-columns:repeat(2,1fr)}
+  .changed{grid-template-columns:1fr}
+  .bento{grid-auto-flow:row dense}.bento .card.tall{grid-row:auto}
+}
+@media (max-width:720px){
+  .ideas,.gg,.olist,.bands{grid-template-columns:1fr}
+  .changed .c{grid-template-columns:1fr}.changed .c .v{grid-column:1;grid-row:auto;text-align:left;font-size:26px}
+  dl.pbo{grid-template-columns:1fr;gap:2px}dl.pbo dd{margin-bottom:8px}
+  .tbl{font-size:14px}.tbl th,.tbl td{padding:10px 12px}
+}
+.cs-hero .lead+.facts{margin-top:40px}
+.bands{grid-template-columns:repeat(2,1fr)}
+.stack2{display:grid;grid-template-columns:1fr;gap:24px;margin-top:24px}
+.tbl td.nw{white-space:nowrap}
+.bento .card:not(.span2) dl.pbo{grid-template-columns:1fr;gap:3px}
+.bento .card:not(.span2) dl.pbo dd{margin-bottom:10px}
+.bento .card:not(.span2) dl.pbo dd:last-of-type{margin-bottom:0}
