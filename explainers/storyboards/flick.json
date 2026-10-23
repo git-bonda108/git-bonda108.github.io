@@ -1,0 +1,522 @@
+{
+ "id": "flick",
+ "title": "Flick",
+ "short": "Flick",
+ "intro": {
+  "dur": 4.5,
+  "promise": "Supplier invoices **reconciled by agents, decided by people**: every line proved against contract, purchase order and meter data.",
+  "pills": [
+   {
+    "t": "30–90 minutes per invoice",
+    "c": "r"
+   },
+   {
+    "t": "Quiet, costly mistakes",
+    "c": "a"
+   },
+   {
+    "t": "Proved, routed, released",
+    "c": "g"
+   }
+  ],
+  "foot": "Client: a pest-control multinational · illustrative screens · pilot figures"
+ },
+ "steps": [
+  "Ask",
+  "Gather",
+  "Check",
+  "Challenge",
+  "Route",
+  "Decide",
+  "Re-test"
+ ],
+ "front": {
+  "app": "Flick",
+  "sub": "in Microsoft Teams · finance operations",
+  "ic": "coin",
+  "tabs": [
+   "Chat",
+   "Approvals",
+   "Reports"
+  ],
+  "input": "Ask Flick about an invoice…"
+ },
+ "zone": "Runs in the client's Azure tenant · data stays in region",
+ "tiles": [
+  {
+   "id": "mgr",
+   "t": "Manager",
+   "s": "plans and hands off",
+   "ic": "route"
+  },
+  {
+   "id": "spec",
+   "t": "Agents",
+   "s": "parse · match · spot · reconcile",
+   "ic": "users"
+  },
+  {
+   "id": "mcp",
+   "t": "Data doors",
+   "s": "MCP, one locked door per system",
+   "ic": "plug"
+  },
+  {
+   "id": "critic",
+   "t": "Critic",
+   "s": "a second AI vendor",
+   "ic": "eye"
+  },
+  {
+   "id": "route",
+   "t": "Router",
+   "s": "green · amber · red",
+   "ic": "flag"
+  },
+  {
+   "id": "ledger",
+   "t": "Ledger",
+   "s": "never posts twice",
+   "ic": "db"
+  }
+ ],
+ "scenes": [
+  {
+   "dur": 6,
+   "step": 0,
+   "lit": [
+    "mgr"
+   ],
+   "cap": "An analyst asks in Teams. A **manager agent** hands the invoice to specialists, each with one job.",
+   "chat": [
+    {
+     "k": "user",
+     "t": "Reconcile this month's invoice from the utility supplier.",
+     "at": 0.3
+    },
+    {
+     "k": "file",
+     "t": "Supplier invoice.pdf",
+     "at": 0.9
+    },
+    {
+     "k": "status",
+     "t": "Reconciling",
+     "at": 1.6,
+     "until": 13
+    }
+   ],
+   "work": {
+    "type": "chain",
+    "per": 5,
+    "start": 1.0,
+    "step": 0.7,
+    "nodes": [
+     {
+      "t": "Parser",
+      "s": "reads every line"
+     },
+     {
+      "t": "Matcher",
+      "s": "finds the evidence"
+     },
+     {
+      "t": "Anomaly",
+      "s": "spots variances"
+     },
+     {
+      "t": "Reconciler",
+      "s": "sets the route"
+     },
+     {
+      "t": "Reporter",
+      "s": "writes it up"
+     }
+    ],
+    "notes": [
+     {
+      "t": "One job each, one clean handoff between",
+      "x": 0,
+      "y": 200,
+      "at": 4.4
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6.5,
+   "step": 1,
+   "lit": [
+    "spec",
+    "mcp"
+   ],
+   "cap": "Each specialist reaches only the system it needs, through **its own locked-down connection**.",
+   "work": {
+    "type": "hub",
+    "center": {
+     "t": "Manager",
+     "s": "durable checkpoint",
+     "ic": "route"
+    },
+    "spokes": [
+     {
+      "t": "Contracts",
+      "ev": "✓ rate from the latest amendment",
+      "at": 0.6
+     },
+     {
+      "t": "Purchase orders",
+      "ev": "✓ PO total found",
+      "at": 1.3
+     },
+     {
+      "t": "Meter data",
+      "ev": "✓ readings for the billing window",
+      "at": 2.0
+     },
+     {
+      "t": "Ledger",
+      "ev": "✓ not billed in an earlier cycle",
+      "at": 2.7
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6.5,
+   "step": 2,
+   "lit": [
+    "spec"
+   ],
+   "cap": "Every line is checked against the evidence, and **every finding cites its source**.",
+   "work": {
+    "type": "checks",
+    "rows": [
+     {
+      "k": "Line 1 · energy charge",
+      "t": "Usage matches the meter; rate matches the contract",
+      "st": "ok",
+      "at": 0.4
+     },
+     {
+      "k": "Line 2 · network charge",
+      "t": "Billed above the rate in the latest amendment",
+      "st": "fail",
+      "at": 1.3
+     },
+     {
+      "k": "Line 3 · metering fee",
+      "t": "Matches the purchase order",
+      "st": "ok",
+      "at": 2.2
+     },
+     {
+      "k": "Citations",
+      "t": "Contract clause, PO line and meter read attached",
+      "st": "info",
+      "at": 3.1
+     }
+    ],
+    "verdict": {
+     "k": "Finding",
+     "t": "One line looks wrong.",
+     "s": "The variance table goes forward with its evidence, not a guess.",
+     "c": "a",
+     "at": 4.0
+    }
+   }
+  },
+  {
+   "dur": 6,
+   "step": 3,
+   "lit": [
+    "critic"
+   ],
+   "cap": "A **critic on a second AI vendor** argues with the result. No source, no claim.",
+   "work": {
+    "type": "checks",
+    "rows": [
+     {
+      "k": "Critic · different vendor",
+      "t": "Is every claim backed by a retrieved source?",
+      "st": "ok",
+      "at": 0.4
+     },
+     {
+      "k": "Critic",
+      "t": "Is the confidence too generous for this variance?",
+      "st": "ok",
+      "at": 1.4
+     },
+     {
+      "k": "Invoice text",
+      "t": "Treated as data, never as an instruction",
+      "st": "ok",
+      "at": 2.4
+     }
+    ],
+    "verdict": {
+     "k": "Route",
+     "t": "Red: draft a dispute.",
+     "s": "The supplier appears to have billed wrongly. Nothing is sent yet.",
+     "c": "r",
+     "at": 3.4
+    }
+   }
+  },
+  {
+   "dur": 6.5,
+   "step": 4,
+   "lit": [
+    "route",
+    "ledger"
+   ],
+   "cap": "Confidence decides the route: **green posts, amber goes to an analyst, red waits for a person**.",
+   "work": {
+    "type": "lanes",
+    "headH": 62,
+    "lanes": [
+     {
+      "t": "Green",
+      "s": "posts automatically, inside limits",
+      "c": "g"
+     },
+     {
+      "t": "Amber",
+      "s": "an analyst reviews",
+      "c": "a"
+     },
+     {
+      "t": "Red",
+      "s": "dispute held for a person",
+      "c": "r"
+     }
+    ],
+    "items": [
+     {
+      "t": "Electricity · depot A",
+      "lane": 0,
+      "at": 0.6,
+      "ic": "check"
+     },
+     {
+      "t": "Network charge · depot B",
+      "lane": 2,
+      "at": 1.1,
+      "ic": "flag"
+     },
+     {
+      "t": "Unfamiliar invoice format",
+      "lane": 1,
+      "at": 1.6,
+      "ic": "eye"
+     },
+     {
+      "t": "Gas · head office",
+      "lane": 0,
+      "at": 2.1,
+      "ic": "check"
+     },
+     {
+      "t": "Ambiguous PO match",
+      "lane": 1,
+      "at": 2.6,
+      "ic": "eye"
+     },
+     {
+      "t": "Electricity · depot C",
+      "lane": 0,
+      "at": 3.1,
+      "ic": "check"
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6.5,
+   "step": 5,
+   "lit": [
+    "route"
+   ],
+   "cap": "The analyst sees **the evidence, not a transcript**, and releases the dispute with one click.",
+   "chatReset": true,
+   "chat": [
+    {
+     "k": "card",
+     "t": "Dispute draft · network charge",
+     "badge": {
+      "t": "Held",
+      "c": "r"
+     },
+     "at": 0.4,
+     "rows": [
+      [
+       "Supplier",
+       "Utility supplier"
+      ],
+      [
+       "Line",
+       "Network charge"
+      ],
+      [
+       "Evidence",
+       "contract amendment, meter read"
+      ],
+      [
+       "Variance",
+       "billed above the agreed rate"
+      ]
+     ],
+     "actions": [
+      "Release dispute",
+      "Edit"
+     ],
+     "approve": {
+      "at": 3.6,
+      "t": "Released by the analyst · recorded with its evidence",
+      "btn": "Released"
+     }
+    }
+   ],
+   "work": {
+    "type": "checks",
+    "rows": [
+     {
+      "k": "Disputes",
+      "t": "Nothing reaches a supplier without a named person",
+      "st": "ok",
+      "at": 0.6
+     },
+     {
+      "k": "Reversals",
+      "t": "Undoing a ledger posting needs a manager",
+      "st": "ok",
+      "at": 1.4
+     },
+     {
+      "k": "Double click",
+      "t": "Each write carries a run key, so it cannot post twice",
+      "st": "ok",
+      "at": 2.2
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6,
+   "step": 6,
+   "lit": [
+    "critic"
+   ],
+   "cap": "Every change is replayed overnight on **invoices the analysts labelled**, then released to a small slice first.",
+   "work": {
+    "type": "chain",
+    "per": 5,
+    "start": 0.5,
+    "step": 0.75,
+    "nodes": [
+     {
+      "t": "A change",
+      "s": "prompt, model or agent"
+     },
+     {
+      "t": "Overnight replay",
+      "s": "analyst-labelled invoices"
+     },
+     {
+      "t": "5% canary",
+      "s": "live traffic, 24 h"
+     },
+     {
+      "t": "25 → 50 → 100%",
+      "s": "ramped release"
+     },
+     {
+      "t": "Auto-rollback",
+      "s": "on any regression"
+     }
+    ],
+    "notes": [
+     {
+      "t": "Quality is measured, not asserted",
+      "x": 0,
+      "y": 200,
+      "at": 4.0
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6,
+   "step": 6,
+   "lit": [],
+   "cap": "In pilot: analysts ask in Teams **instead of opening invoices one by one**.",
+   "chatReset": true,
+   "chat": [
+    {
+     "k": "note",
+     "t": "✓ In pilot",
+     "at": 0.3
+    }
+   ],
+   "work": {
+    "type": "stats",
+    "cols": 3,
+    "items": [
+     {
+      "n": "1,200",
+      "l": "invoices a month",
+      "s": "reconciled in pilot"
+     },
+     {
+      "n": "87%",
+      "l": "right on the first pass",
+      "s": "target 90% at launch"
+     },
+     {
+      "n": "~4 min",
+      "l": "per invoice",
+      "s": "was about 47 by hand",
+      "static": true
+     },
+     {
+      "n": "96%",
+      "l": "of real variances caught",
+      "s": "on the analysts' labelled set"
+     },
+     {
+      "n": "200",
+      "l": "labelled invoices",
+      "s": "gate every change"
+     },
+     {
+      "n": "5%",
+      "l": "canary first",
+      "s": "then a ramp with rollback"
+     }
+    ]
+   }
+  }
+ ],
+ "outro": {
+  "dur": 5,
+  "headline": "Reconciliation as software. Decisions stay with people.",
+  "sub": "Specialist agents gather the evidence, **a second AI argues with it**, and anything hard to undo **waits for a named person**.",
+  "pills": [
+   {
+    "t": "No source, no claim"
+   },
+   {
+    "t": "Least-privilege connectors"
+   },
+   {
+    "t": "Critic on a second vendor"
+   },
+   {
+    "t": "People release disputes",
+    "c": "g"
+   }
+  ],
+  "foot": "Satya Bonda · git-bonda108.github.io/flick.html"
+ }
+}

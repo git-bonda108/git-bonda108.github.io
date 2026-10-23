@@ -1,0 +1,123 @@
+{
+  "id": "playground",
+  "title": "Enterprise AI Playground",
+  "short": "AI Playground",
+  "intro": {
+    "dur": 4.5,
+    "promise": "Every team gets frontier models and agents, and **nothing reaches a provider unchecked, unbudgeted or unrecorded**.",
+    "pills": [{"t": "Unmetered AI spend", "c": "r"}, {"t": "Ungoverned access", "c": "a"}, {"t": "Every call checked and costed", "c": "g"}],
+    "foot": "Solo-built · live demo with seeded personas · illustrative screens"
+  },
+  "steps": ["Sign in", "Budget", "Route", "Call", "Record", "Build", "Prove"],
+  "front": {"app": "AI Playground", "sub": "web workbench · sign in with Entra ID", "ic": "grid", "tabs": ["Chat", "Agents", "Costs", "Evals"], "input": "Ask any approved model…"},
+  "zone": "Runs in your Azure subscription · no unmetered path to any provider",
+  "tiles": [
+    {"id": "id", "t": "Identity", "s": "Entra ID · role policy", "ic": "user"},
+    {"id": "bud", "t": "Budgets", "s": "checked before each call", "ic": "gauge"},
+    {"id": "rt", "t": "Router", "s": "Economy · Workhorse · Premium", "ic": "route"},
+    {"id": "gw", "t": "Gateway", "s": "30 models, 11 providers", "ic": "layers"},
+    {"id": "led", "t": "Ledger", "s": "a row for every call", "ic": "coin"},
+    {"id": "lad", "t": "Ladder", "s": "evidence to production", "ic": "chart"}
+  ],
+  "scenes": [
+    {
+      "dur": 5.5, "step": 0, "lit": ["id"],
+      "cap": "Anyone can use frontier models, but every request first proves **who is asking** and what their role allows.",
+      "chat": [{"k": "user", "t": "Summarise this supplier contract and list the risks.", "at": 0.3}, {"k": "file", "t": "Supplier contract.pdf", "at": 0.8}],
+      "work": {"type": "checks", "rows": [
+        {"k": "Signed in", "t": "Microsoft Entra ID · builder, finance department", "st": "ok", "at": 0.6},
+        {"k": "Policy", "t": "This model is allowed for the builder role", "st": "ok", "at": 1.5},
+        {"k": "Key", "t": "Resolved to a budget owner, never shown in the browser", "st": "ok", "at": 2.4}
+      ], "verdict": {"k": "Rule", "t": "No unmetered path.", "s": "Policy, budget and ledger sit in front of every model.", "at": 3.3}}
+    },
+    {
+      "dur": 6, "step": 1, "lit": ["bud"],
+      "cap": "Budgets are checked **before the call, not after the bill**: alerts at 50, 80 and 100 percent, then a hard stop.",
+      "work": {"type": "meters", "ticks": [50, 80, 100], "gap": 74, "top": 6,
+        "bars": [
+          {"t": "Your monthly budget", "s": "alert sent at 50%", "pct": 64, "at": 0.3},
+          {"t": "Finance team pool", "s": "alert sent at 80%", "pct": 83, "at": 0.9},
+          {"t": "Explorer pool", "s": "spent", "pct": 100, "at": 1.5}
+        ],
+        "stamp": {"t": "Hard stop · provider never called", "at": 3.4, "x": 250, "y": 226}}
+    },
+    {
+      "dur": 6, "step": 2, "lit": ["rt"],
+      "cap": "A **smart router** sends each request to the right tier and records the saving against always using Premium.",
+      "work": {"type": "lanes", "headH": 62,
+        "lanes": [{"t": "Economy", "s": "quick, simple tasks", "c": "g"}, {"t": "Workhorse", "s": "everyday analysis", "c": "v"}, {"t": "Premium", "s": "hard reasoning", "c": "a"}],
+        "items": [
+          {"t": "Fix this paragraph", "lane": 0, "at": 0.5, "ic": "pen"},
+          {"t": "Summarise a contract", "lane": 1, "at": 1.0, "ic": "file"},
+          {"t": "Translate an email", "lane": 0, "at": 1.5, "ic": "mail"},
+          {"t": "Plan a data migration", "lane": 2, "at": 2.0, "ic": "brain"},
+          {"t": "Compare three vendors", "lane": 1, "at": 2.5, "ic": "scale"},
+          {"t": "Tag 200 tickets", "lane": 0, "at": 3.0, "ic": "flag"}
+        ]}
+    },
+    {
+      "dur": 6, "step": 3, "lit": ["gw"],
+      "cap": "One gateway reaches **30 models from 11 providers**. People bring their own keys; platform keys stay hidden.",
+      "work": {"type": "hub", "center": {"t": "Gateway", "s": "policy · budget · ledger", "ic": "layers"},
+        "spokes": [
+          {"t": "Anthropic", "at": 0.5}, {"t": "OpenAI", "at": 0.9}, {"t": "Azure OpenAI", "at": 1.3},
+          {"t": "Google", "at": 1.7}, {"t": "Mistral", "at": 2.1}, {"t": "DeepSeek · xAI · more", "at": 2.5}
+        ]}
+    },
+    {
+      "dur": 6, "step": 4, "lit": ["led"],
+      "cap": "Every call writes a **ledger row**: tokens, time, cost and who paid, so spend is visible by team, person and model.",
+      "chat": [{"k": "bot", "t": "**Three risks found:** auto-renewal, uncapped liability, a 90-day notice period.", "at": 0.4}],
+      "work": {"type": "log", "title": "Cost ledger · one row per call", "ic": "coin", "lines": [
+        {"ts": "10:14:02", "t": "builder · finance · Workhorse · cached prefix used"},
+        {"ts": "10:14:02", "t": "tokens in / out / cached · latency · cost · team key"},
+        {"ts": "10:14:03", "t": "router saving recorded against a Premium baseline"},
+        {"ts": "10:20:41", "t": "explorer · Premium refused · budget at 100%"},
+        {"ts": "10:21:00", "t": "cockpit · by day, department, person, model, key"},
+        {"ts": "10:21:00", "t": "every number reconciles to these rows", "ok": true}
+      ]}
+    },
+    {
+      "dur": 6.5, "step": 5, "lit": ["gw", "led"],
+      "cap": "Teams build agents from **ready-made blueprints**; a run pauses for a person's review, even across a restart.",
+      "chatReset": true,
+      "chat": [{"k": "card", "t": "Review needed · contract-risk agent", "badge": {"t": "Paused", "c": "a"}, "at": 2.0,
+        "rows": [["Step", "draft risk register"], ["Waiting for", "a builder's approval"], ["State", "checkpointed, survives a restart"]],
+        "actions": ["Approve and resume", "Edit"], "approve": {"at": 4.4, "t": "Approved · run resumed from its checkpoint", "btn": "Approved"}}],
+      "work": {"type": "chain", "per": 5, "start": 0.5, "step": 0.8,
+        "nodes": [{"t": "Blueprint", "s": "one of 175"}, {"t": "Run", "s": "LangGraph, checkpointed"}, {"t": "Human review", "s": "survives a restart"}, {"t": "Resume", "s": "from the checkpoint"}, {"t": "Result + trace", "s": "opens as a notebook"}]}
+    },
+    {
+      "dur": 6, "step": 6, "lit": ["lad"],
+      "cap": "An agent reaches production only by climbing a **five-level ladder**, each rung lit by evidence.",
+      "work": {"type": "ladder", "start": 0.6, "step": 0.75, "levels": [
+        {"t": "Draft", "s": "it runs on mock data"},
+        {"t": "Golden", "s": "passes its golden cases"},
+        {"t": "Gated", "s": "a rubric judge and a release gate"},
+        {"t": "Canaried", "s": "re-tested nightly, automatic rollback"},
+        {"t": "Production", "s": "earned, never declared"}
+      ]}
+    },
+    {
+      "dur": 6, "step": 6, "lit": [],
+      "cap": "Live and solo-built: **one policy, one budget, one ledger** for every team's AI.",
+      "chatReset": true,
+      "chat": [{"k": "note", "t": "✓ Live demo · pick any seeded persona", "at": 0.3}],
+      "work": {"type": "stats", "cols": 3, "items": [
+        {"n": "30", "l": "models", "s": "from 11 providers"},
+        {"n": "175", "l": "agent blueprints", "s": "runnable, five frameworks"},
+        {"n": "7,547", "l": "MCP servers", "s": "admin-approved catalogue"},
+        {"n": "5", "l": "level evaluation ladder", "s": "draft to production"},
+        {"n": "50·80·100%", "l": "budget alerts", "s": "then a hard stop", "static": true},
+        {"n": "0", "l": "unmetered paths", "s": "to any provider"}
+      ]}
+    }
+  ],
+  "outro": {
+    "dur": 5,
+    "headline": "Frontier AI for every team, under one policy, one budget, one ledger.",
+    "sub": "Identity, budget and routing **before** every call. A ledger row **after** it. Agents earn production **with evidence**.",
+    "pills": [{"t": "Checked before every call"}, {"t": "Costed after every call"}, {"t": "Right model, right price"}, {"t": "Agents earn production", "c": "g"}],
+    "foot": "Satya Bonda · git-bonda108.github.io · live demo linked on the site"
+  }
+}

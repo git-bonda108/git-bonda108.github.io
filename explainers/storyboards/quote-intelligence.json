@@ -1,0 +1,547 @@
+{
+ "id": "quote-intelligence",
+ "title": "Quote Intelligence",
+ "short": "Quote Intelligence",
+ "intro": {
+  "dur": 4.5,
+  "promise": "Two builders' quotes, one comparison you can trust: **every dollar traces back to its page**, and the maths is done by code.",
+  "pills": [
+   {
+    "t": "Half a day of mapping",
+    "c": "r"
+   },
+   {
+    "t": "Chatbots invent prices",
+    "c": "a"
+   },
+   {
+    "t": "A comparison you can defend",
+    "c": "g"
+   }
+  ],
+  "foot": "Client: a homebuilder · illustrative quote lines · figures from real jobs and the test suites"
+ },
+ "steps": [
+  "Upload",
+  "Read",
+  "Match",
+  "Verify",
+  "Calculate",
+  "Resolve",
+  "Share"
+ ],
+ "front": {
+  "app": "Quote Intelligence",
+  "sub": "web app · for sales consultants",
+  "ic": "scale",
+  "tabs": [
+   "Compare",
+   "Flags",
+   "Exports"
+  ],
+  "input": "Ask to edit a row, e.g. add a rainwater tank…"
+ },
+ "zone": "Runs in the homebuilder's own tenant · no customer details collected",
+ "tiles": [
+  {
+   "id": "read",
+   "t": "Readers",
+   "s": "both quotes, in parallel",
+   "ic": "file"
+  },
+  {
+   "id": "match",
+   "t": "Matcher",
+   "s": "like for like",
+   "ic": "route"
+  },
+  {
+   "id": "flag",
+   "t": "Flagger",
+   "s": "raises anything vague",
+   "ic": "flag"
+  },
+  {
+   "id": "verify",
+   "t": "Verifier",
+   "s": "a different AI model",
+   "ic": "eye"
+  },
+  {
+   "id": "check",
+   "t": "Code check",
+   "s": "snippet on that page?",
+   "ic": "shield"
+  },
+  {
+   "id": "maths",
+   "t": "Exact maths",
+   "s": "decimals, in code",
+   "ic": "calc"
+  }
+ ],
+ "scenes": [
+  {
+   "dur": 6,
+   "step": 0,
+   "lit": [
+    "read"
+   ],
+   "cap": "A consultant uploads **both builders' quotes**. Six specialist agents each take one job.",
+   "chat": [
+    {
+     "k": "file",
+     "t": "Our quote.pdf",
+     "at": 0.3
+    },
+    {
+     "k": "file",
+     "t": "Other builder's quote.pdf",
+     "at": 0.7
+    },
+    {
+     "k": "status",
+     "t": "Reading both quotes, page by page",
+     "at": 1.4,
+     "until": 12
+    }
+   ],
+   "work": {
+    "type": "chain",
+    "per": 3,
+    "start": 1.0,
+    "step": 0.6,
+    "nodes": [
+     {
+      "t": "Our reader",
+      "s": "every price + its page"
+     },
+     {
+      "t": "Their reader",
+      "s": "same rule, in parallel"
+     },
+     {
+      "t": "Matcher",
+      "s": "aligns the wording"
+     },
+     {
+      "t": "Flagger",
+      "s": "vague items raised"
+     },
+     {
+      "t": "Verifier",
+      "s": "re-reads both PDFs"
+     },
+     {
+      "t": "Code + maths",
+      "s": "no AI involved"
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6.5,
+   "step": 1,
+   "lit": [
+    "read"
+   ],
+   "cap": "Every price must carry its **receipt**: the page and the exact words it came from.",
+   "work": {
+    "type": "quote",
+    "srcW": 262,
+    "hlAt": 0.6,
+    "typeAt": 1.3,
+    "typeDur": 2.2,
+    "src": {
+     "t": "Other builder's quote",
+     "ref": "p.7",
+     "hl": 1,
+     "lines": [
+      "Section 6 · Energy and comfort",
+      "Energy package including 6.6kW solar system",
+      "Ducted climate control to living areas",
+      "Allowance for driveway: included"
+     ]
+    },
+    "draft": {
+     "t": "Comparison row · solar",
+     "ref": "competitor side",
+     "ic": "scale",
+     "text": "Competitor offers solar inside a bundle: [[Energy package including 6.6kW solar system]] {{p.7}}"
+    },
+    "check": {
+     "t": "Snippet found word for word on page 7",
+     "at": 3.9
+    }
+   }
+  },
+  {
+   "dur": 6.5,
+   "step": 2,
+   "lit": [
+    "match",
+    "flag"
+   ],
+   "cap": "Different words for the same thing are **matched line by line**; anything vague is flagged, never guessed.",
+   "work": {
+    "type": "compare",
+    "left": {
+     "t": "Our quote"
+    },
+    "right": {
+     "t": "Other builder"
+    },
+    "rows": [
+     {
+      "l": "6.6kW solar system",
+      "lp": "p.3",
+      "r": "Energy package (solar)",
+      "rp": "p.7",
+      "st": "ok",
+      "at": 0.4
+     },
+     {
+      "l": "Ducted air conditioning",
+      "lp": "p.4",
+      "r": "Ducted climate control",
+      "rp": "p.7",
+      "st": "ok",
+      "at": 1.1
+     },
+     {
+      "l": "Concrete driveway",
+      "lp": "p.5",
+      "r": "Driveway: “included”",
+      "rp": "p.7",
+      "st": "warn",
+      "at": 1.8
+     },
+     {
+      "l": "Rainwater tank",
+      "lp": "p.6",
+      "r": null,
+      "st": "fail",
+      "at": 2.5
+     },
+     {
+      "l": "Promotional discount",
+      "lp": "p.2",
+      "r": "Offer ends mid-cycle",
+      "rp": "p.1",
+      "st": "warn",
+      "at": 3.2
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6.5,
+   "step": 3,
+   "lit": [
+    "verify",
+    "check"
+   ],
+   "cap": "Three independent walls stand between the AI and the customer. **The last one is plain code.**",
+   "work": {
+    "type": "checks",
+    "rows": [
+     {
+      "k": "Wall 1 · the format",
+      "t": "A price without page and exact words cannot be emitted",
+      "st": "ok",
+      "at": 0.4
+     },
+     {
+      "k": "Wall 2 · a second AI",
+      "t": "A different model re-reads the PDF and confirms the figure",
+      "st": "ok",
+      "at": 1.4
+     },
+     {
+      "k": "Wall 3 · plain code",
+      "t": "Does that snippet appear, word for word, on that page?",
+      "st": "ok",
+      "at": 2.4
+     }
+    ],
+    "verdict": {
+     "k": "If any wall fails",
+     "t": "Unconfirmed, never shown.",
+     "s": "The row turns amber and stays out of every total.",
+     "c": "a",
+     "at": 3.4
+    }
+   }
+  },
+  {
+   "dur": 6,
+   "step": 4,
+   "lit": [
+    "maths"
+   ],
+   "cap": "All arithmetic runs in **exact decimals in code**, and the headline stays blocked while anything is unconfirmed.",
+   "work": {
+    "type": "sum",
+    "title": "Price difference",
+    "ref": "exact decimals",
+    "rows": [
+     {
+      "t": "Window upgrade",
+      "a": "1,234.99"
+     },
+     {
+      "t": "Letterbox",
+      "a": "99.99"
+     },
+     {
+      "t": "Landscaping",
+      "a": "2,250.00"
+     },
+     {
+      "t": "Appliance upgrade",
+      "a": "4,200.00"
+     },
+     {
+      "t": "Driveway",
+      "st": "warn",
+      "tag": "no quantity",
+      "done": "excluded"
+     },
+     {
+      "t": "Promotional discount",
+      "st": "warn",
+      "tag": "expires",
+      "done": "excluded"
+     }
+    ],
+    "totals": [
+     {
+      "t": "Our items",
+      "a": "7,784.98"
+     },
+     {
+      "t": "Their equivalent",
+      "a": "3,580.00"
+     }
+    ],
+    "head": {
+     "t": "Headline difference",
+     "a": "$4,204.98",
+     "blocked": "Blocked until 2 flags are resolved.",
+     "ok": "Exact to the cent. No rounding drift.",
+     "at": 3.0
+    }
+   }
+  },
+  {
+   "dur": 6,
+   "step": 5,
+   "lit": [
+    "maths"
+   ],
+   "cap": "The consultant resolves each flag; only then does the **headline saving** unlock.",
+   "chatReset": true,
+   "chat": [
+    {
+     "k": "card",
+     "t": "2 items need you",
+     "badge": {
+      "t": "Totals blocked",
+      "c": "a"
+     },
+     "at": 0.3,
+     "rows": [
+      [
+       "Driveway",
+       "“included”, no quantity"
+      ],
+      [
+       "Promotional discount",
+       "expires mid-cycle"
+      ]
+     ],
+     "actions": [
+      "Exclude both",
+      "Add quantity"
+     ],
+     "approve": {
+      "at": 2.4,
+      "t": "Resolved by the consultant · logged",
+      "btn": "Resolved"
+     }
+    }
+   ],
+   "work": {
+    "type": "sum",
+    "title": "Price difference",
+    "ref": "exact decimals",
+    "unblockAt": 2.6,
+    "rows": [
+     {
+      "t": "Window upgrade",
+      "a": "1,234.99",
+      "at": 0
+     },
+     {
+      "t": "Letterbox",
+      "a": "99.99",
+      "at": 0
+     },
+     {
+      "t": "Landscaping",
+      "a": "2,250.00",
+      "at": 0
+     },
+     {
+      "t": "Appliance upgrade",
+      "a": "4,200.00",
+      "at": 0
+     },
+     {
+      "t": "Driveway",
+      "st": "warn",
+      "tag": "no quantity",
+      "done": "excluded",
+      "at": 0
+     },
+     {
+      "t": "Promotional discount",
+      "st": "warn",
+      "tag": "expires",
+      "done": "excluded",
+      "at": 0
+     }
+    ],
+    "totals": [
+     {
+      "t": "Our items",
+      "a": "7,784.98",
+      "at": 0
+     },
+     {
+      "t": "Their equivalent",
+      "a": "3,580.00",
+      "at": 0
+     }
+    ],
+    "head": {
+     "t": "Headline difference",
+     "a": "$4,204.98",
+     "blocked": "Blocked until 2 flags are resolved.",
+     "ok": "Exact to the cent. Every figure traced to its page.",
+     "at": 0
+    }
+   }
+  },
+  {
+   "dur": 5.5,
+   "step": 6,
+   "lit": [],
+   "cap": "Out comes a comparison the consultant can **defend in front of the customer**: Word and Excel, every figure traceable.",
+   "work": {
+    "type": "docfill",
+    "title": "Quote comparison.docx",
+    "tag": "house template",
+    "sections": [
+     {
+      "t": "Side-by-side comparison",
+      "st": "final",
+      "tag": "traced",
+      "at": 0.4
+     },
+     {
+      "t": "Inclusions matrix · yes / no",
+      "st": "final",
+      "tag": "traced",
+      "at": 1.1
+     },
+     {
+      "t": "Financial position, in plain words",
+      "st": "final",
+      "tag": "exact",
+      "at": 1.8
+     },
+     {
+      "t": "Items resolved by the consultant",
+      "st": "review",
+      "tag": "logged",
+      "at": 2.5
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6,
+   "step": 6,
+   "lit": [],
+   "cap": "On a real job it flagged 26 items and **refused to show a saving** until they were resolved.",
+   "chatReset": true,
+   "chat": [
+    {
+     "k": "note",
+     "t": "✓ In use on real customer jobs",
+     "at": 0.3
+    }
+   ],
+   "work": {
+    "type": "stats",
+    "cols": 3,
+    "items": [
+     {
+      "n": "6–8 min",
+      "l": "to a full comparison",
+      "s": "was half a day by hand",
+      "static": true
+     },
+     {
+      "n": "100%",
+      "l": "of priced rows traced",
+      "s": "page + exact words"
+     },
+     {
+      "n": "26",
+      "l": "items flagged on a real job",
+      "s": "saving withheld until resolved"
+     },
+     {
+      "n": "63",
+      "l": "automated checks",
+      "s": "26 of them adversarial"
+     },
+     {
+      "n": "0",
+      "l": "fabricated figures",
+      "s": "under adversarial testing"
+     },
+     {
+      "n": "4,204.98",
+      "l": "exactly, to the cent",
+      "s": "test-suite worked example",
+      "static": true
+     }
+    ]
+   }
+  }
+ ],
+ "outro": {
+  "dur": 5,
+  "headline": "The AI reads and matches. Code guarantees the numbers.",
+  "sub": "Every figure shows its receipt, a second model double-checks it, and **plain code has the final word**.",
+  "pills": [
+   {
+    "t": "Every price has a receipt"
+   },
+   {
+    "t": "A second model re-reads"
+   },
+   {
+    "t": "Maths in exact decimals"
+   },
+   {
+    "t": "Consultant resolves the flags",
+    "c": "g"
+   }
+  ],
+  "foot": "Satya Bonda · git-bonda108.github.io/quote-intelligence.html"
+ }
+}

@@ -1,0 +1,651 @@
+{
+ "id": "auditor",
+ "title": "Autonomous Agentic AI Auditor",
+ "short": "AI Auditor",
+ "intro": {
+  "dur": 4.5,
+  "promise": "An audit pack drafted from the project's **own documents**: every quotation checked, every gap turned into a request to the client.",
+  "pills": [
+   {
+    "t": "Evidence scattered everywhere",
+    "c": "r"
+   },
+   {
+    "t": "Templates written by hand",
+    "c": "a"
+   },
+   {
+    "t": "A defensible pack, ready to review",
+    "c": "g"
+   }
+  ],
+  "foot": "Illustrative screens · results from the first real engagement"
+ },
+ "steps": [
+  "Upload",
+  "Plan",
+  "Draft",
+  "Check",
+  "Ask",
+  "Write",
+  "Review",
+  "Record"
+ ],
+ "front": {
+  "app": "Audit workspace",
+  "sub": "web app · for the delivery team",
+  "ic": "clip",
+  "tabs": [
+   "Project",
+   "Run",
+   "Review queue",
+   "Outputs"
+  ],
+  "input": "Add documents or ask about the run…"
+ },
+ "zone": "Runs in the partner's own cloud · one private index per customer",
+ "tiles": [
+  {
+   "id": "index",
+   "t": "Private index",
+   "s": "this customer only",
+   "ic": "db"
+  },
+  {
+   "id": "plan",
+   "t": "Planner",
+   "s": "plain code, not a model",
+   "ic": "route"
+  },
+  {
+   "id": "write",
+   "t": "Writer",
+   "s": "drafts with quotes",
+   "ic": "pen"
+  },
+  {
+   "id": "critic",
+   "t": "Critic",
+   "s": "a different AI model",
+   "ic": "eye"
+  },
+  {
+   "id": "quote",
+   "t": "Quote check",
+   "s": "code, letter by letter",
+   "ic": "shield"
+  },
+  {
+   "id": "word",
+   "t": "Word writer",
+   "s": "original templates",
+   "ic": "file"
+  }
+ ],
+ "scenes": [
+  {
+   "dur": 5.5,
+   "step": 0,
+   "lit": [
+    "index"
+   ],
+   "cap": "A delivery lead uploads the **project's own documents**. They are indexed for this customer only.",
+   "chat": [
+    {
+     "k": "user",
+     "t": "Prepare the audit pack for the public-sector AI assistant project.",
+     "at": 0.3
+    },
+    {
+     "k": "file",
+     "t": "Statement of work.pdf",
+     "at": 1.2
+    },
+    {
+     "k": "file",
+     "t": "Solution design.docx",
+     "at": 1.5
+    },
+    {
+     "k": "file",
+     "t": "Workshop transcript.vtt",
+     "at": 1.8
+    },
+    {
+     "k": "file",
+     "t": "UAT sign-off.pdf",
+     "at": 2.1
+    },
+    {
+     "k": "status",
+     "t": "Run started",
+     "at": 3.0
+    },
+    {
+     "k": "bot",
+     "t": "Indexing 17 documents for this customer only. Page and paragraph kept for every piece.",
+     "at": 3.6
+    }
+   ],
+   "work": {
+    "type": "docs",
+    "fly": 2.2,
+    "files": [
+     {
+      "t": "Statement of work"
+     },
+     {
+      "t": "Solution design"
+     },
+     {
+      "t": "Requirements.xlsx"
+     },
+     {
+      "t": "Architecture deck"
+     },
+     {
+      "t": "Workshop transcript",
+      "ic": "chat"
+     },
+     {
+      "t": "Meeting notes"
+     },
+     {
+      "t": "UAT sign-off",
+      "ic": "check"
+     },
+     {
+      "t": "Runbook"
+     }
+    ],
+    "target": {
+     "t": "Private index",
+     "s": "this customer only,<br>page and paragraph kept",
+     "ic": "db"
+    }
+   },
+   "litLate": true
+  },
+  {
+   "dur": 4.5,
+   "step": 1,
+   "lit": [
+    "plan"
+   ],
+   "cap": "A **rule-based planner** lists every required template and orders the work. Code decides, not a model.",
+   "chat": [
+    {
+     "k": "bot",
+     "t": "Plan ready: required templates first, ordered by audit control.",
+     "at": 0.5
+    }
+   ],
+   "work": {
+    "type": "chain",
+    "per": 5,
+    "start": 0.6,
+    "step": 0.6,
+    "nodes": [
+     {
+      "t": "Business case",
+      "s": "Assess"
+     },
+     {
+      "t": "Solution design",
+      "s": "Design"
+     },
+     {
+      "t": "Responsible AI",
+      "s": "Design · mandatory"
+     },
+     {
+      "t": "Statement of work",
+      "s": "Build"
+     },
+     {
+      "t": "Acceptance sign-off",
+      "s": "Run"
+     }
+    ],
+    "notes": [
+     {
+      "t": "Same inputs, same plan, every time",
+      "x": 0,
+      "y": 200,
+      "at": 3.4
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6,
+   "step": 2,
+   "lit": [
+    "write"
+   ],
+   "cap": "The writer drafts **only from what it found**, quoting the project's own words with page and paragraph.",
+   "chat": [
+    {
+     "k": "status",
+     "t": "Drafting the business case",
+     "at": 0.3
+    }
+   ],
+   "work": {
+    "type": "quote",
+    "srcW": 262,
+    "hlAt": 0.9,
+    "typeAt": 1.6,
+    "typeDur": 2.1,
+    "src": {
+     "t": "Statement of work",
+     "ref": "p.4 ¶2",
+     "hl": 2,
+     "lines": [
+      "The agency runs a citizen-facing enquiry service across several channels.",
+      "Staff answer repeated policy questions by hand.",
+      "The assistant will answer routine policy enquiries using the agency's published guidance.",
+      "Escalation to a staff member remains available at every step."
+     ]
+    },
+    "draft": {
+     "t": "Draft · Business case",
+     "ref": "control C1.1",
+     "text": "The project addresses repeated policy enquiries. Per the statement of work, [[the assistant will answer routine policy enquiries using the agency's published guidance]] {{SOW p.4 ¶2}}"
+    },
+    "check": {
+     "t": "Quote cited with its page and paragraph",
+     "at": 4.2,
+     "y": 214
+    }
+   }
+  },
+  {
+   "dur": 6,
+   "step": 3,
+   "lit": [
+    "critic",
+    "quote"
+   ],
+   "cap": "A **second AI, on a different model,** challenges the draft. Plain code checks every quote letter for letter.",
+   "chat": [
+    {
+     "k": "bot",
+     "t": "Business case: cleared every check.",
+     "at": 3.8
+    }
+   ],
+   "work": {
+    "type": "checks",
+    "rows": [
+     {
+      "k": "Critic · different model",
+      "t": "Every claim is backed by a quotation",
+      "st": "ok",
+      "at": 0.3
+     },
+     {
+      "k": "Quote check · plain code",
+      "t": "Found word for word in Statement of work, p.4",
+      "st": "ok",
+      "at": 1.1
+     },
+     {
+      "k": "Voice check",
+      "t": "No marketing language, no claims the source does not make",
+      "st": "ok",
+      "at": 1.9
+     },
+     {
+      "k": "Score",
+      "t": "Four signals multiplied; one weak signal pulls it down",
+      "st": "info",
+      "at": 2.7
+     }
+    ],
+    "verdict": {
+     "k": "Outcome",
+     "t": "Auto-approved",
+     "s": "Written as final text. The writer never grades its own work.",
+     "c": "g",
+     "at": 3.6
+    }
+   }
+  },
+  {
+   "dur": 5.5,
+   "step": 4,
+   "lit": [
+    "critic"
+   ],
+   "cap": "Where the documents are silent, it drafts a **precise request to the client** instead of inventing text.",
+   "chat": [
+    {
+     "k": "card",
+     "t": "Client request · draft email",
+     "badge": {
+      "t": "No evidence",
+      "c": "r"
+     },
+     "at": 2.2,
+     "rows": [
+      [
+       "To",
+       "Customer project lead"
+      ],
+      [
+       "About",
+       "Responsible AI impact assessment"
+      ],
+      [
+       "Need",
+       "The signed assessment, dated within 12 months"
+      ]
+     ],
+     "actions": [
+      "Queue to send",
+      "Edit"
+     ]
+    }
+   ],
+   "work": {
+    "type": "checks",
+    "rows": [
+     {
+      "k": "Search",
+      "t": "Responsible AI impact assessment: no matching evidence",
+      "st": "fail",
+      "at": 0.4
+     },
+     {
+      "k": "Rule",
+      "t": "An empty section is never padded with plausible text",
+      "st": "info",
+      "at": 1.3
+     }
+    ],
+    "verdict": {
+     "k": "Outcome",
+     "t": "Client request drafted",
+     "s": "The gap is marked in the document and named in a ready-to-send email.",
+     "c": "r",
+     "at": 2.0
+    }
+   }
+  },
+  {
+   "dur": 5,
+   "step": 5,
+   "lit": [
+    "word"
+   ],
+   "cap": "Approved text goes straight into the **original Word template**, styling intact; anything unfinished is visibly marked.",
+   "work": {
+    "type": "docfill",
+    "title": "C1.1 Business case.docx",
+    "tag": "original styling",
+    "sections": [
+     {
+      "t": "Business problem",
+      "st": "final",
+      "at": 0.5
+     },
+     {
+      "t": "Why AI is the right tool",
+      "st": "final",
+      "at": 1.3
+     },
+     {
+      "t": "Security requirements",
+      "st": "review",
+      "at": 2.1
+     },
+     {
+      "t": "Customer sign-off",
+      "st": "request",
+      "at": 2.6
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6,
+   "step": 6,
+   "lit": [],
+   "cap": "A reviewer works the queue, sees **why** each item was flagged, and approves with one click.",
+   "chatReset": true,
+   "chat": [
+    {
+     "k": "bot",
+     "t": "Run complete. Every required template has a draft.",
+     "at": 0.3
+    },
+    {
+     "k": "card",
+     "t": "Audit pack ready",
+     "badge": {
+      "t": "Ready to review",
+      "c": "g"
+     },
+     "at": 0.9,
+     "rows": [
+      [
+       "Final text",
+       "auto-approved sections"
+      ],
+      [
+       "For review",
+       "each with its reason"
+      ],
+      [
+       "Client requests",
+       "drafted emails"
+      ],
+      [
+       "Pack",
+       "templates, mapping, cost, custody"
+      ]
+     ],
+     "actions": [
+      "Approve pack",
+      "Open queue"
+     ],
+     "approve": {
+      "at": 4.3,
+      "t": "Approved by the delivery lead · requests sent",
+      "btn": "Approved"
+     }
+    }
+   ],
+   "work": {
+    "type": "lanes",
+    "headH": 62,
+    "lanes": [
+     {
+      "t": "Auto-approved",
+      "s": "cleared every gate",
+      "c": "g"
+     },
+     {
+      "t": "For review",
+      "s": "a person confirms",
+      "c": "a"
+     },
+     {
+      "t": "Client request",
+      "s": "evidence needed",
+      "c": "r"
+     }
+    ],
+    "items": [
+     {
+      "t": "Business problem",
+      "lane": 0,
+      "at": 0.51,
+      "ic": "check"
+     },
+     {
+      "t": "Security requirements",
+      "lane": 1,
+      "at": 0.94,
+      "ic": "eye"
+     },
+     {
+      "t": "Impact assessment",
+      "lane": 2,
+      "at": 1.36,
+      "ic": "mail"
+     },
+     {
+      "t": "Solution design",
+      "lane": 0,
+      "at": 1.78,
+      "ic": "check"
+     },
+     {
+      "t": "Acceptance sign-off",
+      "lane": 2,
+      "at": 2.21,
+      "ic": "mail"
+     },
+     {
+      "t": "Statement of work",
+      "lane": 0,
+      "at": 2.63,
+      "ic": "check"
+     },
+     {
+      "t": "Data requirements",
+      "lane": 1,
+      "at": 3.06,
+      "ic": "eye"
+     }
+    ]
+   }
+  },
+  {
+   "dur": 4.5,
+   "step": 7,
+   "lit": [
+    "index",
+    "plan",
+    "write",
+    "critic",
+    "quote",
+    "word"
+   ],
+   "cap": "Every action is logged and fingerprinted, so the pack carries its own **chain of custody**.",
+   "work": {
+    "type": "log",
+    "title": "Run log · saved with the pack",
+    "lines": [
+     {
+      "ts": "09:00:04",
+      "t": "Run started · documents indexed for this customer only",
+      "at": 0.3
+     },
+     {
+      "ts": "09:00:31",
+      "t": "Plan · required templates ordered by control",
+      "at": 0.8
+     },
+     {
+      "ts": "10:12:47",
+      "t": "C1.1 Business case · critic agreed · quotes matched",
+      "at": 1.3
+     },
+     {
+      "ts": "11:40:09",
+      "t": "C2.2 Impact assessment · no evidence · client request drafted",
+      "at": 1.8
+     },
+     {
+      "ts": "12:55:16",
+      "t": "Templates written · original styling kept",
+      "at": 2.3
+     },
+     {
+      "ts": "12:58:02",
+      "t": "Pack sealed · SHA-256 fingerprint recorded",
+      "ok": true,
+      "at": 2.8
+     }
+    ]
+   }
+  },
+  {
+   "dur": 5,
+   "step": 7,
+   "lit": [],
+   "cap": "First engagement, a public-sector AI assistant: every required template drafted, **nothing made up**.",
+   "chatReset": true,
+   "chat": [
+    {
+     "k": "note",
+     "t": "✓ Pilot complete",
+     "at": 0.3
+    }
+   ],
+   "work": {
+    "type": "stats",
+    "cols": 3,
+    "items": [
+     {
+      "n": "46/46",
+      "l": "required templates drafted",
+      "static": true,
+      "at": 0.3
+     },
+     {
+      "n": "17",
+      "l": "project documents read",
+      "at": 0.6
+     },
+     {
+      "n": "≈4 hours",
+      "l": "unattended run",
+      "static": true,
+      "at": 0.8999999999999999
+     },
+     {
+      "n": "0",
+      "l": "fabricated citations",
+      "at": 1.2
+     },
+     {
+      "n": "138",
+      "l": "precise client requests",
+      "at": 1.5
+     },
+     {
+      "n": "< US$10",
+      "l": "in model cost",
+      "static": true,
+      "at": 1.8
+     }
+    ]
+   }
+  }
+ ],
+ "outro": {
+  "dur": 5,
+  "headline": "From scattered documents to a defensible audit pack.",
+  "sub": "The AI reads and drafts. **Separate agents and plain code** check every line. **People decide** what ships.",
+  "pills": [
+   {
+    "t": "Customer's own documents only"
+   },
+   {
+    "t": "Every quote checked in code"
+   },
+   {
+    "t": "Gaps become client requests"
+   },
+   {
+    "t": "People approve what ships",
+    "c": "g"
+   }
+  ],
+  "foot": "Satya Bonda · git-bonda108.github.io/auditor.html"
+ }
+}

@@ -562,3 +562,34 @@ dl.pbo dd:last-of-type{color:var(--ink);font-weight:500}
 .bento .card:not(.span2) dl.pbo{grid-template-columns:1fr;gap:3px}
 .bento .card:not(.span2) dl.pbo dd{margin-bottom:10px}
 .bento .card:not(.span2) dl.pbo dd:last-of-type{margin-bottom:0}
+
+/* 24 Oct 2026 — animated explainers + business / tech layers */
+html[data-view="biz"] .tech-only{display:none!important}
+html[data-view="tech"] .biz-only{display:none!important}
+.view-toggle{display:inline-flex;padding:4px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line);gap:2px}
+.view-toggle button{font:600 13.5px/1 var(--sans);padding:10px 16px;border:0;border-radius:999px;background:transparent;color:var(--ink-3);cursor:pointer;white-space:nowrap}
+.view-toggle button[aria-pressed="true"]{background:var(--deep);color:#fff}
+.view-toggle button:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.view-dock{position:fixed;right:20px;bottom:20px;z-index:60;box-shadow:0 10px 30px -10px rgba(30,27,75,.45);background:#fff}
+.view-dock::before{content:"Detail";font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);align-self:center;padding:0 8px 0 10px}
+.work-switch{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:-20px 0 32px;color:var(--ink-3);font-size:14.5px}
+.explainer{margin:0;position:relative}
+.explainer video{display:block;width:100%;aspect-ratio:16/9;height:auto;border-radius:12px;border:1px solid var(--line);background:#1E1B4B;cursor:pointer;object-fit:cover}
+.explainer figcaption{display:flex;align-items:center;gap:14px;margin-top:8px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.explainer figcaption span{margin-right:auto}
+.explainer figcaption a,.explainer figcaption button{font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--teal);background:none;border:0;padding:0;cursor:pointer;text-decoration:none}
+.explainer figcaption a:hover,.explainer figcaption button:hover{text-decoration:underline}
+.card .explainer{margin:2px 0 0}
+.card.wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px 36px;align-items:start}
+.card.wide>.explainer{grid-row:1/span 6;grid-column:1}
+.card.wide>:not(.explainer){grid-column:2}
+.x-sec{padding:clamp(48px,6vw,80px) 0}
+.x-sec .sec-head{margin-bottom:28px}
+.x-sec .explainer{max-width:1100px}
+.x-sec .explainer video{border-radius:16px;box-shadow:0 2px 4px rgba(11,31,46,.05),0 30px 60px -30px rgba(30,27,75,.45)}
+.x-note{margin-top:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:var(--ink-3);font-size:15px}
+@media (max-width:1024px){.card.wide{grid-template-columns:1fr}.card.wide>.explainer,.card.wide>:not(.explainer){grid-column:1;grid-row:auto}}
+@media (max-width:720px){.view-dock{right:12px;left:12px;bottom:12px;justify-content:center}.view-toggle button{padding:9px 13px;font-size:13px}.work-switch{margin:-8px 0 24px}.explainer figcaption{font-size:10.5px;gap:10px}body{padding-bottom:64px}}
+@media print{.view-dock{display:none}}
+/* Business view: the bento packs into three full rows (Playground span 2 + Auditor, three cards, Dragonfruit + CoLearn span 2) */
+@media (min-width:1025px){html[data-view="biz"] .bento .card.tall{grid-row:auto}html[data-view="biz"] .bento .card.wide{grid-column:span 2}}

@@ -64,3 +64,37 @@ document.querySelectorAll('.pfilter button').forEach(b=>b.addEventListener('clic
   const f=b.dataset.f;
   document.querySelectorAll('.ptile').forEach(t=>t.classList.toggle('hide',f!=='all'&&t.dataset.g!==f));
 }));
+
+// 24 Oct 2026 — business / tech layers and animated explainers.
+// The view lives on <html data-view>, is remembered per browser, and can be forced with ?view=tech|biz.
+(function(){
+  const root = document.documentElement;
+  function setView(v, save){
+    root.dataset.view = v;
+    document.querySelectorAll('.view-toggle button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+    if (save) { try { localStorage.setItem('sb-view', v); } catch (_) {} }
+  }
+  document.querySelectorAll('.view-toggle button').forEach(b => b.addEventListener('click', () => setView(b.dataset.view, true)));
+  setView(root.dataset.view || 'biz', false);
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vids = [...document.querySelectorAll('.explainer video')];
+  function arm(v){ if (v.dataset.armed) return; v.querySelectorAll('source[data-src]').forEach(s => { s.src = s.dataset.src; }); v.load(); v.dataset.armed = '1'; }
+  // A click pauses or resumes; a reader's pause holds until they click again, even when scrolled back into view.
+  vids.forEach(v => {
+    if (reduce) { v.controls = true; arm(v); return; } // preload=none: nothing downloads until the reader presses play
+    v.addEventListener('click', () => { arm(v); if (v.paused) { delete v.dataset.hold; v.play().catch(() => {}); } else { v.dataset.hold = '1'; v.pause(); } });
+  });
+  document.querySelectorAll('.explainer .x-full').forEach(b => b.addEventListener('click', () => {
+    const v = b.closest('.explainer').querySelector('video'); arm(v); delete v.dataset.hold; v.play().catch(() => {});
+    if (v.requestFullscreen) v.requestFullscreen().catch(() => {}); else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+  }));
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(en => {
+      const v = en.target;
+      if (en.isIntersecting) { arm(v); if (!v.dataset.hold) v.play().catch(() => {}); }
+      else if (!v.paused) v.pause();
+    }), { threshold: 0.35 });
+    vids.forEach(v => io.observe(v));
+  }
+})();

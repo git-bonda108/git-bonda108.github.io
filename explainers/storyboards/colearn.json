@@ -1,0 +1,458 @@
+{
+ "id": "colearn",
+ "title": "Agentic CoLearn",
+ "short": "CoLearn",
+ "intro": {
+  "dur": 4.5,
+  "promise": "A tutor for Indian school students: lessons **only from the official NCERT textbook**, checked by a second AI, and practice that adapts to each child.",
+  "pills": [
+   {
+    "t": "Generic AI makes things up",
+    "c": "r"
+   },
+   {
+    "t": "One pace for every child",
+    "c": "a"
+   },
+   {
+    "t": "Verified lessons, tracked mastery",
+    "c": "g"
+   }
+  ],
+  "foot": "Personal build · live app · illustrative screens"
+ },
+ "steps": [
+  "Open",
+  "Draft",
+  "Verify",
+  "Practise",
+  "Track",
+  "Review",
+  "Report"
+ ],
+ "front": {
+  "app": "CoLearn",
+  "sub": "Class 10 · Science · chapter workspace",
+  "ic": "cap",
+  "tabs": [
+   "Learn",
+   "Practice",
+   "Mock test",
+   "Ask",
+   "Progress"
+  ],
+  "input": "Ask a doubt about this chapter…"
+ },
+ "zone": "Grounded in official NCERT text · learning maths runs without AI",
+ "tiles": [
+  {
+   "id": "ncert",
+   "t": "NCERT text",
+   "s": "official chapters only",
+   "ic": "book"
+  },
+  {
+   "id": "writer",
+   "t": "Lesson writer",
+   "s": "simple words, grounded",
+   "ic": "pen"
+  },
+  {
+   "id": "verify",
+   "t": "Verifier",
+   "s": "tries to refute it",
+   "ic": "eye"
+  },
+  {
+   "id": "key",
+   "t": "Answer key",
+   "s": "checked in code first",
+   "ic": "check"
+  },
+  {
+   "id": "mastery",
+   "t": "Mastery",
+   "s": "BKT · IRT",
+   "ic": "chart"
+  },
+  {
+   "id": "review",
+   "t": "Review plan",
+   "s": "FSRS spacing",
+   "ic": "loop"
+  }
+ ],
+ "scenes": [
+  {
+   "dur": 5.5,
+   "step": 0,
+   "lit": [
+    "ncert"
+   ],
+   "cap": "A student opens a chapter. Lessons are written **only from the official NCERT textbook**.",
+   "chat": [
+    {
+     "k": "user",
+     "t": "Teach me the reflection of light.",
+     "at": 0.3
+    },
+    {
+     "k": "status",
+     "t": "Preparing your lesson",
+     "at": 1.0,
+     "until": 12
+    }
+   ],
+   "work": {
+    "type": "docs",
+    "fly": 2.4,
+    "files": [
+     {
+      "t": "Light: reflection",
+      "ic": "book"
+     },
+     {
+      "t": "NCERT Class 10 PDF",
+      "ic": "file"
+     },
+     {
+      "t": "Learning outcomes",
+      "ic": "clip"
+     },
+     {
+      "t": "Hindi edition",
+      "ic": "book"
+     },
+     {
+      "t": "Telugu edition",
+      "ic": "book"
+     },
+     {
+      "t": "Board question styles",
+      "ic": "flag"
+     }
+    ],
+    "target": {
+     "t": "This chapter only",
+     "s": "official ncert.nic.in text,<br>nothing from the open web",
+     "ic": "book"
+    }
+   }
+  },
+  {
+   "dur": 6.5,
+   "step": 1,
+   "lit": [
+    "writer"
+   ],
+   "cap": "The lesson writer explains in simple words, but **only from the chapter's own text**.",
+   "work": {
+    "type": "quote",
+    "srcW": 262,
+    "hlAt": 0.6,
+    "typeAt": 1.3,
+    "typeDur": 2.4,
+    "src": {
+     "t": "NCERT Science · Class 10",
+     "ref": "Light",
+     "ic": "book",
+     "hl": 2,
+     "lines": [
+      "Light seems to travel in straight lines.",
+      "The laws of reflection of light are:",
+      "The angle of incidence is equal to the angle of reflection.",
+      "The incident ray, the normal and the reflected ray lie in the same plane."
+     ]
+    },
+    "draft": {
+     "t": "Lesson · bouncing light",
+     "ref": "draft",
+     "ic": "pen",
+     "text": "Shine a torch at a mirror and watch the beam bounce. NCERT's first law: [[the angle of incidence is equal to the angle of reflection]] {{NCERT · Light}}"
+    },
+    "check": {
+     "t": "Drafted from the chapter text only",
+     "at": 4.2
+    }
+   }
+  },
+  {
+   "dur": 6,
+   "step": 2,
+   "lit": [
+    "verify"
+   ],
+   "cap": "A separate verifier **tries to prove the lesson wrong**. Only what survives reaches the student.",
+   "work": {
+    "type": "checks",
+    "rows": [
+     {
+      "k": "Verifier · a separate AI",
+      "t": "Tries to refute every claim against the chapter",
+      "st": "ok",
+      "at": 0.4,
+      "res": 1.0
+     },
+     {
+      "k": "If it objects",
+      "t": "The lesson is rewritten once, with the objections",
+      "st": "info",
+      "at": 1.6
+     },
+     {
+      "k": "If it still objects",
+      "t": "Rejected and never shown or saved",
+      "st": "info",
+      "at": 2.4
+     }
+    ],
+    "verdict": {
+     "k": "Lesson",
+     "t": "Survived. Shown.",
+     "s": "Every verdict is kept in a decision log.",
+     "c": "g",
+     "at": 3.4
+    }
+   }
+  },
+  {
+   "dur": 6,
+   "step": 3,
+   "lit": [
+    "key"
+   ],
+   "cap": "Answers are checked against **the answer key first**. The AI never decides a score.",
+   "chatReset": true,
+   "chat": [
+    {
+     "k": "bot",
+     "t": "Which mirror can form a real image?",
+     "at": 0.3
+    },
+    {
+     "k": "user",
+     "t": "A concave mirror",
+     "at": 1.2
+    },
+    {
+     "k": "bot",
+     "t": "**Correct.** Your mastery of spherical mirrors went up.",
+     "at": 2.4
+    }
+   ],
+   "work": {
+    "type": "checks",
+    "rows": [
+     {
+      "k": "Multiple choice",
+      "t": "Matched against the answer key, in code",
+      "st": "ok",
+      "at": 0.6
+     },
+     {
+      "k": "Written answers",
+      "t": "A rubric examiner with guards on the server",
+      "st": "ok",
+      "at": 1.5
+     },
+     {
+      "k": "Scores, mastery, schedules",
+      "t": "Plain maths, never the AI",
+      "st": "info",
+      "at": 2.4
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6,
+   "step": 4,
+   "lit": [
+    "mastery"
+   ],
+   "cap": "Every answer updates a running estimate of **how well the student knows each idea** (Bayesian Knowledge Tracing).",
+   "work": {
+    "type": "meters",
+    "gap": 64,
+    "top": 4,
+    "bars": [
+     {
+      "t": "Laws of reflection",
+      "s": "mastered",
+      "pct": 88,
+      "at": 0.3
+     },
+     {
+      "t": "Spherical mirrors",
+      "s": "almost there",
+      "pct": 66,
+      "at": 0.7
+     },
+     {
+      "t": "Mirror formula",
+      "s": "practising",
+      "pct": 42,
+      "at": 1.1
+     },
+     {
+      "t": "Refraction",
+      "s": "just started",
+      "pct": 21,
+      "at": 1.5
+     }
+    ],
+    "mode": "good"
+   }
+  },
+  {
+   "dur": 5.5,
+   "step": 5,
+   "lit": [
+    "review"
+   ],
+   "cap": "Spaced repetition brings each idea back **just before it would be forgotten**.",
+   "work": {
+    "type": "lanes",
+    "headH": 62,
+    "lanes": [
+     {
+      "t": "Review today",
+      "s": "due now",
+      "c": "v"
+     },
+     {
+      "t": "In 3 days",
+      "s": "getting stronger",
+      "c": "a"
+     },
+     {
+      "t": "Next week",
+      "s": "well remembered",
+      "c": "g"
+     }
+    ],
+    "items": [
+     {
+      "t": "Mirror formula",
+      "lane": 0,
+      "at": 0.5,
+      "ic": "loop"
+     },
+     {
+      "t": "Spherical mirrors",
+      "lane": 1,
+      "at": 1.0,
+      "ic": "loop"
+     },
+     {
+      "t": "Laws of reflection",
+      "lane": 2,
+      "at": 1.5,
+      "ic": "loop"
+     },
+     {
+      "t": "Refraction basics",
+      "lane": 0,
+      "at": 2.0,
+      "ic": "loop"
+     },
+     {
+      "t": "Plane mirrors",
+      "lane": 2,
+      "at": 2.5,
+      "ic": "loop"
+     }
+    ]
+   }
+  },
+  {
+   "dur": 6,
+   "step": 6,
+   "lit": [],
+   "cap": "Parents get a report computed from real progress, across **every NCERT grade and chapter**.",
+   "chatReset": true,
+   "chat": [
+    {
+     "k": "card",
+     "t": "Parent report",
+     "badge": {
+      "t": "From saved progress",
+      "c": "v"
+     },
+     "at": 0.3,
+     "rows": [
+      [
+       "Strong",
+       "laws of reflection"
+      ],
+      [
+       "Practising",
+       "mirror formula"
+      ],
+      [
+       "Next review",
+       "today"
+      ]
+     ]
+    }
+   ],
+   "work": {
+    "type": "stats",
+    "cols": 3,
+    "items": [
+     {
+      "n": "1–12",
+      "l": "every school grade",
+      "s": "CBSE curriculum",
+      "static": true
+     },
+     {
+      "n": "535",
+      "l": "verified NCERT chapters"
+     },
+     {
+      "n": "3",
+      "l": "languages",
+      "s": "English · Hindi · Telugu"
+     },
+     {
+      "n": "5",
+      "l": "workspaces per chapter",
+      "s": "learn · practise · test · ask · progress"
+     },
+     {
+      "n": "0",
+      "l": "AI cost for the learning maths",
+      "s": "BKT · IRT · FSRS in code"
+     },
+     {
+      "n": "1",
+      "l": "API key runs it all",
+      "s": "any one of five providers"
+     }
+    ]
+   }
+  }
+ ],
+ "outro": {
+  "dur": 5,
+  "headline": "Lessons a parent can trust, at each child's own pace.",
+  "sub": "Generated **only from NCERT text**, challenged by a second AI before a child sees them, and **scored by maths, not by a model**.",
+  "pills": [
+   {
+    "t": "Official NCERT text only"
+   },
+   {
+    "t": "Verified before it is shown"
+   },
+   {
+    "t": "Mastery tracked per idea"
+   },
+   {
+    "t": "Reviews spaced to remember",
+    "c": "g"
+   }
+  ],
+  "foot": "Satya Bonda · agentic-colearn.abacusai.app"
+ }
+}
